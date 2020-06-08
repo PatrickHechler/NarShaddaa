@@ -19,7 +19,7 @@ public class Schnittstelle {
 	}
 	
 	public static void setDefaultConfig() {
-		configServer("localhost", 5869);
+		configServer(Constants.DEAFULT_HOST, Constants.DEAFULT_PORT);
 	}
 	
 	public static void setKommunikation(KommunikationInterface newKomm) {

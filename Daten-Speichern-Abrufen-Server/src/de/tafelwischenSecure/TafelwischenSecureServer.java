@@ -36,7 +36,7 @@ public class TafelwischenSecureServer {
 			while (true) {
 				String adminCmd = eingabe.next();
 				switch (adminCmd) {
-				case Constants.ADM_HELP:
+				case Constants.HELP:
 					help();
 					break;
 				
@@ -96,18 +96,18 @@ public class TafelwischenSecureServer {
 		Collection <? extends ServerObjectInterface> users = ServerUser.getUsers();
 		show(users);
 	}
-
+	
 	private void show(Collection <? extends ServerObjectInterface> serverObjects) {
-		for (ServerObjectInterface serverObject:serverObjects) {
+		for (ServerObjectInterface serverObject : serverObjects) {
 			serverObject.print();
 		}
 	}
-
+	
 	private void listmessages() {
 		Collection <? extends ServerObjectInterface> mesages = ServerMessage.getMessages();
 		show(mesages);
 	}
-
+	
 	private void restore(String fileName) throws CorruptServerDataException, IOException {
 		String fullName = "server-" + fileName + ".data";
 		if ( !Files.exists(Paths.get(saveFolder, fullName))) {
@@ -140,7 +140,7 @@ public class TafelwischenSecureServer {
 	
 	private static void help() {
 		System.out.println("ADMINCOMMANDS");
-		System.out.println("  enter '" + Constants.ADM_HELP + "' to show this text");
+		System.out.println("  enter '" + Constants.HELP + "' to show this text");
 		System.out.println("  enter '" + Constants.ADM_EXIT + "' to stop the server");
 		System.out.println("  enter '" + Constants.ADM_SAVE + "' to save the current server data");
 		System.out.println("  enter '" + Constants.ADM_BACKUP + " <name>' to save the current server data in the backupFile <name>");
@@ -165,9 +165,9 @@ public class TafelwischenSecureServer {
 	
 	private void configure(String[] args) throws IOException {
 		saveFolder = "./data";
-		port = 5869;
+		port = Constants.DEAFULT_PORT;
 		debuglog = true;
-		System.out.println("TafelwischenSecureServer V"+VERSION);
+		System.out.println("TafelwischenSecureServer V" + VERSION);
 		System.out.println("Config:");
 		System.out.println("   port        = " + port);
 		System.out.println("   save Folder = " + new File(saveFolder).getAbsolutePath());

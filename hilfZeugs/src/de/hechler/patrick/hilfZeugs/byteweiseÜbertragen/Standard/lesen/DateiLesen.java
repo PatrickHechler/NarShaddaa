@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import de.hechler.patrick.hilfZeugs.CompatibilityUtils;
+
 public class DateiLesen implements DateiLesenInterface {
 	
 	private final String datei;
@@ -42,25 +44,26 @@ public class DateiLesen implements DateiLesenInterface {
 	
 	@Override
 	public byte[] getBytes(int maxBytes) throws IOException {
-		if (position >= größe) {
-			return null;
-		}
-//		JAVA 1.8
-		/* if (position + maxBytes > größe) {
-		 * maxBytes = (int) (größe - position);
-		 * }
-		 * byte[] bytes = new byte[maxBytes];
-		 * position += maxBytes;
-		 * input.read(bytes);
-		 * return bytes; */
-//		JAVA 1.8 ENDE
-		
-		if ( (position + maxBytes) < größe) {
-			position += maxBytes;
-			return input.readNBytes(maxBytes);
-		}
-		position = größe;
-		return input.readAllBytes();
+//		if (position >= größe) {
+//			return null;
+//		}
+////		JAVA 1.8
+//		/* if (position + maxBytes > größe) {
+//		 * maxBytes = (int) (größe - position);
+//		 * }
+//		 * byte[] bytes = new byte[maxBytes];
+//		 * position += maxBytes;
+//		 * input.read(bytes);
+//		 * return bytes; */
+////		JAVA 1.8 ENDE
+//		
+//		if ( (position + maxBytes) < größe) {
+//			position += maxBytes;
+//			return input.readNBytes(maxBytes);
+//		}
+//		position = größe;
+//		return input.readAllBytes();
+		return CompatibilityUtils.readNBytes(input, maxBytes);
 	}
 	
 	@Override

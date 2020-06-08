@@ -6,6 +6,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 
+import de.hechler.patrick.hilfZeugs.CompatibilityUtils;
+
 public class SocketLesen implements SocketLesenInterface {
 	
 	private long anzahlBisherigerBytes;
@@ -31,14 +33,14 @@ public class SocketLesen implements SocketLesenInterface {
 	
 	@Override
 	public byte[] getBytes() throws IOException {
-		byte[] rückgabe = input.readAllBytes();
+		byte[] rückgabe = CompatibilityUtils.readAllBytes(input);
 		anzahlBisherigerBytes += rückgabe.length;
 		return rückgabe;
 	}
 	
 	@Override
 	public byte[] getBytes(int maxBytes) throws IOException {
-		byte[] rückgabe = input.readNBytes(maxBytes);
+		byte[] rückgabe = CompatibilityUtils.readNBytes(input, maxBytes);
 		anzahlBisherigerBytes += rückgabe.length;
 		return rückgabe;
 	}

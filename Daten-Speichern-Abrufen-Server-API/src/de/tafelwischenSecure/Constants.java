@@ -287,8 +287,8 @@ public class Constants {
 	 * This is an admin command
 	 * shows all admin Commands
 	 */
-	@Command(spezify = CommandEnum.adminCommand)
-	public static final String ADM_HELP = "?";
+	@Command(spezify = CommandEnum.adminClientCommand)
+	public static final String HELP = "?";
 	/**
 	 * This is an admin command
 	 * this + nameOfTheBackupFile
@@ -327,5 +327,23 @@ public class Constants {
 	 */
 	@Command(spezify = CommandEnum.adminCommand)
 	public static final String ADM_LISTMESSAGES = "listmessages";
+	
+	public static final String USR_CHECK = "check";
+	
+	public static final String USR_LIST = "list";
+	
+	public static final String USR_GET_MSG = "getMsg";
+	
+	public static final String USR_GET_MSG_LO = "getmsg";
+	
+	public static final String USR_SEND_MSG = "sendMsg";
+	
+	public static final String USR_SEND_MSG_LO = "sendmsg";
+	
+	public static final String USR_QUIT = "quit";
+
+	public static final int DEAFULT_PORT = 8925;
+	
+	public static final String DEAFULT_HOST = "Korriban";
 	
 }

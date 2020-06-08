@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.Objects;
 
+import de.hechler.patrick.hilfZeugs.CompatibilityUtils;
 import de.hechler.patrick.hilfZeugs.patExep.NotYetImplementedException;
 import de.hechler.patrick.hilfZeugs.umwandeln.ListUndArrayUmwandeln;
 import de.tafelwischenSecure.Constants;
@@ -90,7 +91,7 @@ public class ServerWorker implements ServerWorkerInterface {
 	
 	@Override
 	public String executeCommand(String command) {
-		command = Objects.requireNonNullElse(command, Constants.UNKNOWN_COMMAND);
+		command = CompatibilityUtils.requireNonNullElse(command, Constants.UNKNOWN_COMMAND);
 		try {
 			if (command.equals(Constants.IS_ALIVE)) {
 				return commandExecuter.isAlive();

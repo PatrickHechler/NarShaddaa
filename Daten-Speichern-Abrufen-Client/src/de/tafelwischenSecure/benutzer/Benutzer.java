@@ -268,4 +268,9 @@ public class Benutzer {
 		return new UserErgebnis(userKey, password);
 	}
 	
+	public static boolean exists(String username) throws IOException {
+		String userExi = Schnittstelle.senden(Constants.USER_EXISTS + username);
+		return (Constants.TRUE.equals(userExi));
+	}
+	
 }
