@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//src/de/tafelwischenSecure/Server.java=utf8
+encoding//src/de/tafelwischenSecure/commandExecution/ServerCommandExecuter.java=utf8
+encoding//src/de/tafelwischenSecure/commandExecution/ServerCommandExecuterInterface.java=utf8
+encoding//src/de/tafelwischenSecure/secure/DecryptedMessage.java=utf8
+encoding//src/de/tafelwischenSecure/secure/ServerSidedSecurityManager.java=utf8
+encoding//src/de/tafelwischenSecure/secure/ServerSidedSecurityManagerInterface.java=utf-8
+encoding//src/de/tafelwischenSecure/serverObjects/ServerObjectInterface.java=utf8
+encoding//src/de/tafelwischenSecure/serverObjects/user/ServerUser.java=UTF8
+encoding//src/de/tafelwischenSecure/serverObjects/user/ServerUserInterface.java=utf8
+encoding//src/de/tafelwischenSecure/worker/ServerWorker.java=utf8
+encoding//src/de/tafelwischenSecure/worker/ServerWorkerInterface.java=utf8
+encoding//testSrc/de/tafelwischenSecure/secure/ServerSidedSecurityManagerTest.java=UTF-8
+encoding//testSrc/de/tafelwischenSecure/serverObjects/user/ServerUserTest.java=UTF8
+encoding/<project>=UTF-8

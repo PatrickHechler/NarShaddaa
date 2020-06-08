@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="de/hechler/patrick/hilfZeugs/immutable/list/" kind="src" path="src"/>
+	<classpathentry kind="src" path="testSrc"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry exported="true" kind="lib" path="teslibs/byte-buddy-1.10.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="teslibs/byte-buddy-agent-1.10.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="teslibs/objenesis-2.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="teslibs/mockito-core-3.3.3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
