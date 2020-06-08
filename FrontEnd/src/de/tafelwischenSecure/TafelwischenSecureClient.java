@@ -32,6 +32,7 @@ public class TafelwischenSecureClient {
 	
 	static {
 		Schnittstelle.setDefaultConfig();
+		Schnittstelle.configServer("localhost", Constants.DEAFULT_PORT);
 		int zw;
 		try {
 			zw = Schnittstelle.getServerVersion();
