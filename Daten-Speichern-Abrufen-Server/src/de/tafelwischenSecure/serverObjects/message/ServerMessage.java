@@ -129,6 +129,17 @@ public class ServerMessage extends Message implements ServerMessageInterface {
 		throw new InvalidAccessException(user, "message with the id " + id);
 	}
 	
+	public static List <String> getAllMessages(String user) {
+		Collection <ServerMessage> nachrichten = messages.values();
+		List <String> rückgabe = new ArrayList <String>();
+		for (ServerMessage serverMessage : nachrichten) {
+			if (serverMessage.sendTo.equals(user)) {
+				rückgabe.add(serverMessage.getShortMessage());
+			}
+		}
+		return rückgabe;
+	}
+	
 	public static List <String> getUncheckedMessages(String user) {
 		Collection <ServerMessage> nachrichten = messages.values();
 		List <String> rückgabe = new ArrayList <String>();

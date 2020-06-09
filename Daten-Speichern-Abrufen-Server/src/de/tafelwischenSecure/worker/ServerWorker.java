@@ -144,7 +144,7 @@ public class ServerWorker implements ServerWorkerInterface {
 		if (Constants.MESSAGE.equals(befehle.get(0))) {
 			if (Constants.SEND.equals(befehle.get(1))) {
 				String fromUser = befehle.get(2);
-				String pwHash= befehle.get(3);
+				String pwHash = befehle.get(3);
 				String toUser = befehle.get(4);
 				String title = befehle.get(5);
 				String inhalt = orig.split(Constants.COMMAND_SPLITTER, 8)[7];
@@ -152,6 +152,9 @@ public class ServerWorker implements ServerWorkerInterface {
 			}
 			if (Constants.NEW.equals(befehle.get(1))) {
 				return commandExecuter.hasNewMessages(befehle.get(2), befehle.get(3));
+			}
+			if (Constants.GET_ALL.equals(befehle.get(1))) {
+				return commandExecuter.getAllMessages(befehle.get(2), befehle.get(3));
 			}
 			
 			befehle.remove(0);

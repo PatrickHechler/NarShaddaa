@@ -99,7 +99,7 @@ public class Constants {
 	 * 
 	 * this + newUsername
 	 * empfangen:
-	 * 	The Passwort of the new user. + COMMAND_SPLITTER + the private Key of the new user.
+	 * 	The Passwort of the new user. + COMMAND_SPLITTER + the public Key of the new user.
 	 * 	{@link #FALSE}, if the user already exists or something other was wrong.
 	 * </pre>
 	 */
@@ -133,7 +133,7 @@ public class Constants {
 	 * empfangen:
 	 * 	{@link #FALSE}, if the user does not exists
 	 * 	otherwise:
-	 * 		The Private Key of this user encrypted with the Passwort of the user
+	 * 		The public Key of this user encrypted with the Passwort of the user
 	 * </pre>
 	 */
 	@Command(spezify = CommandEnum.commandPart)
@@ -162,7 +162,7 @@ public class Constants {
 	 * parameter to get messages
 	 */
 	@Command(spezify = CommandEnum.parameter)
-	private static final String GET_ALL = "GAL";
+	public static final String GET_ALL = "GAL";
 	/**
 	 * <pre>
 	 * this + username + {@link #COMMAND_SPLITTER} + pwHash

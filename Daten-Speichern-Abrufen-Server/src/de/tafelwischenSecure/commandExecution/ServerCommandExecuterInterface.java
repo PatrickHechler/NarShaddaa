@@ -93,6 +93,8 @@ public interface ServerCommandExecuterInterface {
 	 */
 	public String hasNewMessages(String username, String pwHash);
 
-	public String getMessage(List <String> befehle); 
+	public String getMessage(List <String> befehle);
+
+	public String getAllMessages(String username, String pwHash); 
 	
 }

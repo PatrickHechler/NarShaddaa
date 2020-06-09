@@ -132,7 +132,24 @@ public class ServerCommandExecuter implements ServerCommandExecuterInterface {
 		}
 		List <String> liste = ServerMessage.getUncheckedMessages(username);
 		StringBuilder messageShortTexts = new StringBuilder();
-		liste.forEach( (dieser) -> {
+		liste.forEach((dieser) -> {
+			messageShortTexts.append(dieser).append(Constants.COMMAND_SPLITTER);
+		});
+		return liste.size() + Constants.COMMAND_SPLITTER + messageShortTexts.toString();
+	}
+	
+	@Override
+	public String getAllMessages(String username, String pwHash) {
+		try {
+			if ( !ServerUser.getUserByname(username).isPwHash(pwHash)) {
+				return Constants.WRONG_PW;
+			}
+		} catch (UserDoesNotExistsExeption e) {
+			return Constants.FALSE;
+		}
+		List <String> liste = ServerMessage.getAllMessages(username);
+		StringBuilder messageShortTexts = new StringBuilder();
+		liste.forEach((dieser) -> {
 			messageShortTexts.append(dieser).append(Constants.COMMAND_SPLITTER);
 		});
 		return liste.size() + Constants.COMMAND_SPLITTER + messageShortTexts.toString();

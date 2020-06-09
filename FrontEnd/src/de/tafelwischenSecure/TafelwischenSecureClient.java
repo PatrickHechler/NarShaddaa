@@ -24,7 +24,7 @@ import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
 
 public class TafelwischenSecureClient {
 	
-	public static final int VERSION = 1;
+	public static final int VERSION = 2;
 	public static final int EXPECTED_SERVER_VERSION = 4;
 	public static int serverVersion;
 	private static long passwort;
@@ -98,7 +98,7 @@ public class TafelwischenSecureClient {
 			}
 		}
 	}
-
+	
 	private static void config(String[] args) {
 		serverName = (args.length > 0) ? args[0] : Constants.DEAFULT_HOST;
 		try {
@@ -295,7 +295,8 @@ public class TafelwischenSecureClient {
 	private static void help() {
 		System.out.println("  " + Constants.HELP + " um dies anzuzeigen.");
 		System.out.println("  " + Constants.USR_CHECK + " um dir die anzahl an neuen Nachrichten anzuzeigen.");
-		System.out.println("  " + Constants.USR_LIST + " um dies anzuzeigen.");
+		System.out.println("  " + Constants.USR_LIST + " um alle ungelesenen Nachrichten anzuzeigen.");
+		System.out.println("  " + Constants.USR_LIST_ALL + " um alle Nachrichten anzuzeigen.");
 		System.out.println("  " + Constants.USR_GET_MSG + " <msgID> um die Nachricht ID zu lesen.");
 		System.out.println("  " + Constants.USR_GET_ENC_MSG + " <msgID> um die verschlüsselte Nachricht ID zu lesen");
 		System.out.println("  " + Constants.USR_SEND_MSG + " um eine Nachricht zu senden.");
