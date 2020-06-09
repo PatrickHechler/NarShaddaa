@@ -20,6 +20,7 @@ public class TafelwischenSecureServer {
 	private int port;
 	private Server server;
 	private static boolean debuglog;
+	private boolean background;
 	
 	public TafelwischenSecureServer() {
 	}
@@ -29,7 +30,15 @@ public class TafelwischenSecureServer {
 		programm = new TafelwischenSecureServer();
 		try {
 			programm.configure(args);
-			programm.startUp();
+			if (programm.background) {
+				programm.startBackground();
+				while (true) {
+					Thread.sleep(600000);
+					programm.save();
+				}
+			
+			}
+			programm.startBackground();
 			help();
 			String filename;
 			GlobalScanner eingabe = GlobalScanner.getInstance();
@@ -151,7 +160,14 @@ public class TafelwischenSecureServer {
 		System.out.println("  enter '" + Constants.ADM_LISTMESSAGES + "' outputs the list of messages.");
 	}
 	
-	private void startUp() throws IOException, CorruptServerDataException {
+	private void startForeground() throws CorruptServerDataException, IOException {
+		System.out.println("Starte: " + new Date());
+		server = new Server(port, saveFolder);
+		server.load();
+		server.start();
+	}
+	
+	private void startBackground() throws IOException, CorruptServerDataException {
 		System.out.println("Starte: " + new Date());
 		server = new Server(port, saveFolder);
 		server.load();
@@ -164,14 +180,58 @@ public class TafelwischenSecureServer {
 	}
 	
 	private void configure(String[] args) throws IOException {
-		saveFolder = "./data";
-		port = Constants.DEAFULT_PORT;
-		debuglog = true;
+		try {
+			background = false;
+			debuglog = true;
+			saveFolder = "./data";
+			port = Constants.DEAFULT_PORT;
+			int runde;
+			int counter = 0;
+			for (runde = 0; runde < args.length; runde ++ ) {
+				String option = args[runde];
+				switch (option) {
+				case "--background":
+				case "-b":
+					background = true;
+					break;
+				case "--quiet":
+				case "-q":
+					debuglog = false;
+					break;
+				case "--savefolder":
+				case "-s":
+					runde ++ ;
+					saveFolder = args[runde];
+					break;
+				default: {
+					if (counter == 0) {
+						port = Integer.parseInt(option);
+						counter ++ ;
+						break;
+					}
+					usage();
+				}
+				}
+			}
+		} catch (NumberFormatException e) {
+			System.err.println("Wrong port in args");
+			usage();
+		}
 		System.out.println("TafelwischenSecureServer V" + VERSION);
 		System.out.println("Config:");
 		System.out.println("   port        = " + port);
 		System.out.println("   save Folder = " + new File(saveFolder).getAbsolutePath());
 		System.out.println("   debuglog    = " + debuglog);
+		System.out.println("   background  = " + background);
+	}
+	
+	private void usage() {
+		System.out.println("Usage: java -jar server.jar [-b] [-q] [-s <folder>] [<port>]");
+		System.out.println("    --background, -b  : run in background");
+		System.out.println("    --quiet, -q       : deactivates debug logging");
+		System.out.println("    --savefolder <folder>, -s <folder>");
+		System.out.println("                      : set the folder for the serverdata");
+		System.exit(1);
 	}
 	
 	public static void logDebug(String message) {

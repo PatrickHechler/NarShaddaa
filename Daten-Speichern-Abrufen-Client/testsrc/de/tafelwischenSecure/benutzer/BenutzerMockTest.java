@@ -17,10 +17,10 @@ import de.tafelwischenSecure.Schnittstelle;
 import de.tafelwischenSecure.exceptions.UserAlreadyExistsException;
 import de.tafelwischenSecure.exceptions.UserException;
 import de.tafelwischenSecure.komm.KommunikationInterface;
-import de.tafelwischenSecure.komm.sec.SecurityManagerInterface;
-import de.tafelwischenSecure.komm.sec.VerschlüsselteServerNachricht;
 import de.tafelwischenSecure.rsa.schlüssel.AssymetrischPaar;
 import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
+import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
+import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
 
 class BenutzerMockTest {
 	
@@ -54,7 +54,7 @@ class BenutzerMockTest {
 	@Disabled
 	void testAnmeldenNOT_FINISH() throws IOException {
 		KommunikationInterface kommMock = mock(KommunikationInterface.class);
-		SecurityManagerInterface secureMock = mock(SecurityManagerInterface.class);
+		ClientSidedSecurityManagerInterface secureMock = mock(ClientSidedSecurityManagerInterface.class);
 		
 		System.out.println("PW:\t" + EXISTING_USER_PW);
 		System.out.println("HASH:\t" + Rules.generatePwHash(12548L));
@@ -75,7 +75,7 @@ class BenutzerMockTest {
 	@Test
 	void testErstellen() throws IOException, UserException {
 		KommunikationInterface kommMock = mock(KommunikationInterface.class);
-		SecurityManagerInterface secureMock = mock(SecurityManagerInterface.class);
+		ClientSidedSecurityManagerInterface secureMock = mock(ClientSidedSecurityManagerInterface.class);
 		
 		when(kommMock.sendMessage(Constants.IS_ALIVE)).thenReturn(Constants.TRUE);
 		when(kommMock.sendMessage(Constants.USER_EXISTS + NEW_USERNAME)).thenReturn(Constants.FALSE);
@@ -95,7 +95,7 @@ class BenutzerMockTest {
 	@Test
 	void testErstellenWithoutServerIsAlive() throws IOException {
 		KommunikationInterface kommMock = mock(KommunikationInterface.class);
-		SecurityManagerInterface secureMock = mock(SecurityManagerInterface.class);
+		ClientSidedSecurityManagerInterface secureMock = mock(ClientSidedSecurityManagerInterface.class);
 		
 		when(kommMock.sendMessage(Constants.IS_ALIVE)).thenReturn(Constants.FALSE);
 		when(kommMock.sendMessage(Constants.USER_EXISTS + NEW_USERNAME)).thenReturn(Constants.FALSE);
@@ -116,7 +116,7 @@ class BenutzerMockTest {
 	@Test
 	void testErstellenUserExists() throws IOException {
 		KommunikationInterface kommMock = mock(KommunikationInterface.class);
-		SecurityManagerInterface secureMock = mock(SecurityManagerInterface.class);
+		ClientSidedSecurityManagerInterface secureMock = mock(ClientSidedSecurityManagerInterface.class);
 		
 		when(kommMock.sendMessage(Constants.IS_ALIVE)).thenReturn(Constants.TRUE);
 //		USer exists already

@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.internal.matchers.StartsWith;
 
 import de.tafelwischenSecure.komm.KommunikationInterface;
-import de.tafelwischenSecure.komm.sec.SecurityManagerInterface;
-import de.tafelwischenSecure.komm.sec.VerschlüsselteServerNachricht;
 import de.tafelwischenSecure.rsa.schlüssel.AssymetrischPaar;
+import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
+import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
 
 class SchnittstelleTest {
 	
@@ -49,7 +49,7 @@ class SchnittstelleTest {
 		KommunikationInterface kommMock = mock(KommunikationInterface.class);
 		Schnittstelle.setKommunikation(kommMock);
 		
-		SecurityManagerInterface secureMock = mock(SecurityManagerInterface.class);
+		ClientSidedSecurityManagerInterface secureMock = mock(ClientSidedSecurityManagerInterface.class);
 		Schnittstelle.setSecurityManager(secureMock);
 		
 		when(kommMock.sendMessage(Constants.GET_PUBLIC_KEY_FROM_SERVER)).thenReturn(serverKeys.getOffenAlsString());

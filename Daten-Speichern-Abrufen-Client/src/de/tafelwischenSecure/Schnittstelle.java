@@ -4,14 +4,14 @@ import java.io.IOException;
 
 import de.tafelwischenSecure.komm.Kommunikation;
 import de.tafelwischenSecure.komm.KommunikationInterface;
-import de.tafelwischenSecure.komm.sec.ClientSidedSecurityManager;
-import de.tafelwischenSecure.komm.sec.SecurityManagerInterface;
-import de.tafelwischenSecure.komm.sec.VerschlüsselteServerNachricht;
 import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.secure.ClientSidedSecurityManager;
+import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
+import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
 
 public class Schnittstelle {
 	
-	private static SecurityManagerInterface secure = new ClientSidedSecurityManager();
+	private static ClientSidedSecurityManagerInterface secure = new ClientSidedSecurityManager();
 	private static KommunikationInterface komm;
 	
 	public static void configServer(String name, int port) {
@@ -26,7 +26,7 @@ public class Schnittstelle {
 		komm = newKomm;
 	}
 	
-	public static void setSecurityManager(SecurityManagerInterface newSecure) {
+	public static void setSecurityManager(ClientSidedSecurityManagerInterface newSecure) {
 		secure = newSecure;
 	}
 	

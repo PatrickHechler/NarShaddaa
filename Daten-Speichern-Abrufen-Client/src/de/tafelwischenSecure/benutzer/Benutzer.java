@@ -21,8 +21,19 @@ import de.tafelwischenSecure.message.ShortMessage;
 import de.tafelwischenSecure.message.ShortMessageInterface;
 import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
 import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.secure.ClientSidedSecurityManager;
+import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
+import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
 
 public class Benutzer {
+	
+	public static boolean sendEncrypted(String username, String pwHash, String destinyUsername, String title, String inhalt, AssymetrischOffen offenerKey)
+			throws IOException, UserDoesNotExistsExeption {
+		ClientSidedSecurityManagerInterface secure = new ClientSidedSecurityManager();
+		VerschlüsselteServerNachricht encryptedInhalt = secure.encrypt(inhalt, offenerKey);
+		inhalt = encryptedInhalt.getEncryptedSeed() + Constants.COMMAND_SPLITTER + encryptedInhalt.getEncryptedMessage();
+		return sendMessage(username, pwHash, destinyUsername, title, inhalt);
+	}
 	
 	public static boolean sendMessage(String username, String pwHash, String destinyUsername, String title, String inhalt)
 			throws IOException, UserDoesNotExistsExeption {
@@ -38,13 +49,40 @@ public class Benutzer {
 		String senden = Constants.SEND_MESSAGE + username + Constants.COMMAND_SPLITTER + pwHash + Constants.COMMAND_SPLITTER + destinyUsername
 				+ Constants.COMMAND_SPLITTER + title + Constants.COMMAND_SPLITTER + inhalt;
 		
-//		TODO verschlüsseln
-		
 		empfangen = Schnittstelle.verschlüsseltSenden(senden);
 		if (Constants.TRUE.equals(empfangen)) {
 			return true;
 		}
 		return false;
+	}
+	
+	public static ShortMessageInterface[] getAllMessages(String username, String pwHash) throws IOException, UserDoesNotExistsExeption, WrongPasswortException {
+		String empfangen;
+		empfangen = Schnittstelle.senden(Constants.USER_EXISTS + username);
+		if (Constants.FALSE.equals(empfangen)) {
+			throw new UserDoesNotExistsExeption(username);
+		}
+		empfangen = Schnittstelle.verschlüsseltSenden(Constants.GET_ALL_MESSAGES + username + Constants.COMMAND_SPLITTER + pwHash);
+		if (Constants.WRONG_PW.equals(empfangen)) {
+			throw new WrongPasswortException();
+		}
+		if (Constants.FALSE.equals(empfangen)) {
+			return new ShortMessageInterface[0];
+		}
+		String[] shrtMsgs = empfangen.split(Constants.COMMAND_SPLITTER);
+		ShortMessageInterface[] rückgabe = new ShortMessageInterface[Integer.parseInt(shrtMsgs[0])];
+		int runde;
+//		messageID + messageTitle + sendFrom + sendTime 
+		for (runde = 0; runde < rückgabe.length; runde ++ ) {
+			long msgId;
+			try {
+				msgId = Long.parseLong(shrtMsgs[1 + (runde * 4)]);
+			} catch (NumberFormatException e) {
+				msgId = -1;
+			}
+			rückgabe[runde] = new ShortMessage(shrtMsgs[3 + (runde * 4)], shrtMsgs[4 + (runde * 4)], shrtMsgs[2 + (runde * 4)], msgId);
+		}
+		return rückgabe;
 	}
 	
 	public static ShortMessageInterface[] hasNewMessages(String username, String pwHash) throws IOException, UserDoesNotExistsExeption, WrongPasswortException {
@@ -80,6 +118,27 @@ public class Benutzer {
 	 * + The username of the user, who send the message
 	 * + The title of the message
 	 * + text of the message */
+	public static MessageInterface getEncryptedMessage(String username, String pwHash, long id, AssymetrischEigener eigenerKey)
+			throws UserDoesNotExistsExeption, IOException {
+		try {
+			MessageInterface encMessage = getMessage(username, pwHash, id);
+			MessageInterface rückgabe;
+			String encSeed = encMessage.getInhalt().split(Constants.COMMAND_SPLITTER)[0];
+			String encMsg = encMessage.getInhalt().split(Constants.COMMAND_SPLITTER)[1];
+			long seed = eigenerKey.entschlüsselnLong(ZahlenUmwandeln.hexZuByteArray(encSeed));
+			String inhalt = ByteweiseÜbertragen.Verschlüsselt.entschlüsselnString(ZahlenUmwandeln.hexZuByteArray(encMsg), seed);
+			rückgabe = new Message(encMessage.getSendFrom(), encMessage.getTime(), encMessage.getTitle(), inhalt, id);
+			return rückgabe;
+		} catch (RuntimeException e) {
+			System.err.println("The encrypted message was wrong: " + e.toString());
+			return new Message("", "", "", "");
+		}
+	}
+	
+	/* The Time, when the server got the message
+	 * + The username of the user, who send the message
+	 * + The title of the message
+	 * + text of the message */
 	public static MessageInterface getMessage(String username, String pwHash, long id) throws UserDoesNotExistsExeption, IOException {
 		String empfangen;
 		empfangen = Schnittstelle.senden(Constants.USER_EXISTS + username);
@@ -90,8 +149,8 @@ public class Benutzer {
 		if (Constants.FALSE.equals(empfangen)) {
 			return null;
 		}
-		String[] msg = empfangen.split(Constants.COMMAND_SPLITTER);
-		return new Message(msg[1], msg[0], msg[2], msg[3]);
+		String[] msg = empfangen.split(Constants.COMMAND_SPLITTER, 4);
+		return new Message(msg[1], msg[0], msg[2], msg[3], id);
 	}
 	
 	public static AssymetrischOffen getOffenFromUser(String username) throws IOException, UserDoesNotExistsExeption {

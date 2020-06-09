@@ -10,11 +10,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.hechler.patrick.hilfZeugs.umwandeln.ZahlenUmwandeln;
-import de.tafelwischenSecure.komm.sec.ClientSidedSecurityManager;
-import de.tafelwischenSecure.komm.sec.VerschlüsselteServerNachricht;
 import de.tafelwischenSecure.rsa.schlüssel.AssymetrischPaar;
 import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
 import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.secure.ClientSidedSecurityManager;
+import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
 
 class SecurityManagerTest {
 	

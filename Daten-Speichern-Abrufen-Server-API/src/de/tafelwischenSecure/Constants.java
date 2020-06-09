@@ -48,6 +48,7 @@ public class Constants {
 	 * this + encryptedSymetricSeed + COMMAND_SPLITTER + encryptedMessage
 	 */
 	@Command(spezify = CommandEnum.prefix)
+	@Implemented(since = 2)
 	public static final String ENCRYPTED = "ENC";
 	
 	/**
@@ -158,6 +159,11 @@ public class Constants {
 	@Command(spezify = CommandEnum.parameter)
 	public static final String SEND = "SND";
 	/**
+	 * parameter to get messages
+	 */
+	@Command(spezify = CommandEnum.parameter)
+	private static final String GET_ALL = "GAL";
+	/**
 	 * <pre>
 	 * this + username + {@link #COMMAND_SPLITTER} + pwHash
 	 * empfangen:
@@ -173,6 +179,22 @@ public class Constants {
 	@Command(spezify = CommandEnum.commandPart)
 	@Implemented(since = 3)
 	public static final String HAS_HEW_MESSAGES = USER + COMMAND_SPLITTER + MESSAGE + COMMAND_SPLITTER + NEW + COMMAND_SPLITTER;
+	/**
+	 * <pre>
+	 * this + username + {@link #COMMAND_SPLITTER} + pwHash
+	 * empfangen:
+	 * 	{@link #FALSE}, if something was wrong
+	 * 	
+	 * 	numberOfMessages + 
+	 * 	{@link #COMMAND_SPLITTER} + messageID + {@link #COMMAND_SPLITTER} + messageTitle + {@link #COMMAND_SPLITTER} + sendFrom + {@link #COMMAND_SPLITTER} + sendTime + 
+	 * 	{@link #COMMAND_SPLITTER} + messageID + {@link #COMMAND_SPLITTER} + messageTitle + {@link #COMMAND_SPLITTER} + sendFrom + {@link #COMMAND_SPLITTER} + sendTime + 
+	 * 	{@link #COMMAND_SPLITTER} + messageID + {@link #COMMAND_SPLITTER} + messageTitle + {@link #COMMAND_SPLITTER} + sendFrom + {@link #COMMAND_SPLITTER} + sendTime + 
+	 * 	...
+	 * </pre>
+	 */
+	@Command(spezify = CommandEnum.commandPart)
+	@Implemented(since = 4)
+	public static final String GET_ALL_MESSAGES = USER + COMMAND_SPLITTER + MESSAGE + COMMAND_SPLITTER + GET_ALL + COMMAND_SPLITTER;
 	/**
 	 * <pre>
 	 * this + username + {@link #COMMAND_SPLITTER} + messageID + {@link #COMMAND_SPLITTER} + pwHash
@@ -328,22 +350,43 @@ public class Constants {
 	@Command(spezify = CommandEnum.adminCommand)
 	public static final String ADM_LISTMESSAGES = "listmessages";
 	
+	@Command(spezify = CommandEnum.clientCommand)
 	public static final String USR_CHECK = "check";
 	
+	@Command(spezify = CommandEnum.clientCommand)
 	public static final String USR_LIST = "list";
 	
+	@Command(spezify = CommandEnum.clientCommand)
 	public static final String USR_GET_MSG = "getMsg";
+	
+	@Command(spezify = CommandEnum.clientCommand)
+	public static final String USR_GET_ENC_MSG = "getEncMsg";
+	
+	@Command(spezify = CommandEnum.clientCommand)
+	public static final String USR_GET_ENC_MSG_LO = "getencmsg";
 	
 	public static final String USR_GET_MSG_LO = "getmsg";
 	
+	@Command(spezify = CommandEnum.clientCommand)
 	public static final String USR_SEND_MSG = "sendMsg";
 	
+	@Command(spezify = CommandEnum.clientCommand)
+	public static final String USR_SEND_ENC_MSG = "sendEncMsg";
+	
+	@Command(spezify = CommandEnum.clientCommand)
+	public static final String USR_SEND_ENC_MSG_LO = "sendencmsg";
+	
+	@Command(spezify = CommandEnum.clientCommand)
 	public static final String USR_SEND_MSG_LO = "sendmsg";
 	
+	@Command(spezify = CommandEnum.clientCommand)
 	public static final String USR_QUIT = "quit";
-
+	
+	@Command(spezify = CommandEnum.clientCommand)
+	public static final String USR_LIST_ALL = "listall";
+	
 	public static final int DEAFULT_PORT = 8925;
 	
-	public static final String DEAFULT_HOST = "Korriban";
+	public static final String DEAFULT_HOST = "localhost";
 	
 }
