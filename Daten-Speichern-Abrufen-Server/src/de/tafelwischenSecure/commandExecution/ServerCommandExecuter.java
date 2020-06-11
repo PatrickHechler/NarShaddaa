@@ -7,13 +7,16 @@ import java.util.Random;
 
 import de.hechler.patrick.hilfZeugs.umwandeln.StringByteConvert;
 import de.tafelwischenSecure.Constants;
+import de.tafelwischenSecure.Rules;
 import de.tafelwischenSecure.Server;
 import de.tafelwischenSecure.TafelwischenSecureServer;
 import de.tafelwischenSecure.exceptions.InvalidAccessException;
+import de.tafelwischenSecure.exceptions.InvalidPwHashExeption;
 import de.tafelwischenSecure.exceptions.InvalidUsernameExeption;
 import de.tafelwischenSecure.exceptions.MessageDoesNotExistException;
 import de.tafelwischenSecure.exceptions.UserAlreadyExistsException;
 import de.tafelwischenSecure.exceptions.UserDoesNotExistsExeption;
+import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
 import de.tafelwischenSecure.serverObjects.message.ServerMessage;
 import de.tafelwischenSecure.serverObjects.user.ServerUser;
 import de.tafelwischenSecure.serverObjects.user.ServerUserInterface;
@@ -64,8 +67,8 @@ public class ServerCommandExecuter implements ServerCommandExecuterInterface {
 	}
 	
 	@Override
-	public String createUser(String userName, boolean wasEncryptedSending) {
-		if (wasEncryptedSending == false) {
+	public String createUser(String userName, boolean isEncryptedSending) {
+		if (isEncryptedSending == false) {
 			return Constants.FALSE;
 		}
 		
@@ -78,6 +81,25 @@ public class ServerCommandExecuter implements ServerCommandExecuterInterface {
 			return Constants.FALSE;
 		}
 		return passwort + Constants.COMMAND_SPLITTER + user.getEncryptedEigenenKey();
+	}
+	
+	@Override
+	public String createUserWithPwAndKey(String username, String pwHash, String encryptedEigener, String offener, boolean isEncryptedSending) {
+		if (isEncryptedSending == false) {
+			return Constants.FALSE;
+		}
+		AssymetrischOffen offenerKey;
+		try {
+			offenerKey = new AssymetrischOffen(offener);
+		} catch (Exception e) {
+			return Constants.FALSE;
+		}
+		try {
+			new ServerUser(pwHash, username, offenerKey, encryptedEigener);
+		} catch (UserAlreadyExistsException | InvalidUsernameExeption | InvalidPwHashExeption e) {
+			return Constants.FALSE;
+		}
+		return Constants.TRUE;
 	}
 	
 	@Override

@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
-import java.util.Objects;
 
 import de.hechler.patrick.hilfZeugs.CompatibilityUtils;
 import de.hechler.patrick.hilfZeugs.patExep.NotYetImplementedException;
@@ -13,9 +12,6 @@ import de.hechler.patrick.hilfZeugs.umwandeln.ListUndArrayUmwandeln;
 import de.tafelwischenSecure.Constants;
 import de.tafelwischenSecure.Server;
 import de.tafelwischenSecure.TafelwischenSecureServer;
-import de.tafelwischenSecure.command.Command;
-import de.tafelwischenSecure.command.CommandEnum;
-import de.tafelwischenSecure.command.Implemented;
 import de.tafelwischenSecure.commandExecution.ServerCommandExecuterInterface;
 import de.tafelwischenSecure.exceptions.UnknownCommandException;
 import de.tafelwischenSecure.secure.DecryptedMessage;
@@ -125,6 +121,9 @@ public class ServerWorker implements ServerWorkerInterface {
 	
 	private String executeUserCommand(List <String> befehle, String orig) throws UnknownCommandException {
 		if (Constants.NEW.equals(befehle.get(0))) {
+			if (Constants.PASSWORT_HASH.equals(befehle.get(1))) {
+				return commandExecuter.createUserWithPwAndKey(befehle.get(2), befehle.get(3), befehle.get(4), befehle.get(5), (getSeed() != null));
+			}
 			return commandExecuter.createUser(befehle.get(1), (getSeed() != null));
 		}
 		

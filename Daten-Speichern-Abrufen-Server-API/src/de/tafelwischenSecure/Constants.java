@@ -108,6 +108,18 @@ public class Constants {
 	public static final String SEND_NEW_USER_TO_SERVER = USER + COMMAND_SPLITTER + NEW + COMMAND_SPLITTER;
 	/**
 	 * <pre>
+	 * IMPORTANT:
+	 * 	If this is not a encrypted sending, the server will not create the new user
+	 * 
+	 * this + username + {@link #COMMAND_SPLITTER} + pwHash +{@link #COMMAND_SPLITTER} +  encryptedPrivateKey +{@link #COMMAND_SPLITTER} +  publicKey
+	 * </pre>
+	 */
+	@Command(spezify = CommandEnum.commandPart)
+	@Implemented(since = 5)
+	public static final String SEND_NEW_USER_WITH_PWHASH_AND_KEY_TO_SERVER = USER + COMMAND_SPLITTER + NEW + COMMAND_SPLITTER + PASSWORT_HASH
+			+ COMMAND_SPLITTER;
+	/**
+	 * <pre>
 	 * this
 	 * empfangen:
 	 * 	the public key of the server.

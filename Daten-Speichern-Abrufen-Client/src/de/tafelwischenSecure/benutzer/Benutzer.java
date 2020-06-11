@@ -12,6 +12,7 @@ import de.tafelwischenSecure.Constants;
 import de.tafelwischenSecure.Rules;
 import de.tafelwischenSecure.Schnittstelle;
 import de.tafelwischenSecure.exceptions.InvalidUsernameExeption;
+import de.tafelwischenSecure.exceptions.UnknownCommandException;
 import de.tafelwischenSecure.exceptions.UserAlreadyExistsException;
 import de.tafelwischenSecure.exceptions.UserDoesNotExistsExeption;
 import de.tafelwischenSecure.exceptions.WrongPasswortException;
@@ -19,6 +20,7 @@ import de.tafelwischenSecure.message.Message;
 import de.tafelwischenSecure.message.MessageInterface;
 import de.tafelwischenSecure.message.ShortMessage;
 import de.tafelwischenSecure.message.ShortMessageInterface;
+import de.tafelwischenSecure.rsa.schlüssel.AssymetrischPaar;
 import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
 import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
 import de.tafelwischenSecure.secure.ClientSidedSecurityManager;
@@ -26,6 +28,11 @@ import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
 import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
 
 public class Benutzer {
+	
+	public static boolean exists(String username) throws IOException {
+		String userExi = Schnittstelle.senden(Constants.USER_EXISTS + username);
+		return (Constants.TRUE.equals(userExi));
+	}
 	
 	public static boolean sendEncrypted(String username, String pwHash, String destinyUsername, String title, String inhalt, AssymetrischOffen offenerKey)
 			throws IOException, UserDoesNotExistsExeption {
@@ -327,9 +334,29 @@ public class Benutzer {
 		return new UserErgebnis(userKey, password);
 	}
 	
-	public static boolean exists(String username) throws IOException {
-		String userExi = Schnittstelle.senden(Constants.USER_EXISTS + username);
-		return (Constants.TRUE.equals(userExi));
+	public static AssymetrischEigener erstellen(String username, long passwort) throws UserAlreadyExistsException, IOException, UnknownCommandException {
+		if (exists(username)) {
+			throw new UserAlreadyExistsException(username);
+		}
+		AssymetrischPaar keyPaar = new AssymetrischPaar();
+		keyPaar.setName(username);
+		String keyStringOffen = keyPaar.getOffenAlsString();
+		String keyStringEigener = keyPaar.getEigenenAlsString();
+		String encryptedEigener = ZahlenUmwandeln.zuHex(ByteweiseÜbertragen.Verschlüsselt.verschlüsseln(keyStringEigener, passwort));
+		String empfangen = Schnittstelle.verschlüsseltSenden(Constants.SEND_NEW_USER_WITH_PWHASH_AND_KEY_TO_SERVER + username + Constants.COMMAND_SPLITTER
+				+ Rules.generatePwHash(passwort) + Constants.COMMAND_SPLITTER + encryptedEigener + Constants.COMMAND_SPLITTER + keyStringOffen);
+		if (Constants.FALSE.equals(empfangen)) {
+			System.err.println("The server did not create the new user.");
+			return null;
+		}
+		if (Constants.UNKNOWN_COMMAND.equals(empfangen)) {
+			throw new UnknownCommandException("");
+		}
+		if ( !Constants.TRUE.equals(empfangen)) {
+			System.err.println("The server answered wrongly.");
+			return null;
+		}
+		return keyPaar.getEigenen();
 	}
 	
 }

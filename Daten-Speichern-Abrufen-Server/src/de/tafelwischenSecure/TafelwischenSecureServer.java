@@ -15,7 +15,7 @@ import de.tafelwischenSecure.serverObjects.user.ServerUser;
 
 public class TafelwischenSecureServer {
 	
-	public static final int VERSION = 4;
+	public static final int VERSION = 5;
 	private String saveFolder;
 	private int port;
 	private Server server;

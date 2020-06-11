@@ -61,6 +61,15 @@ public interface ServerCommandExecuterInterface {
 	 * </pre>
 	 */
 	public String createUser(String userName, boolean isEncryptedSending);
+	/**
+	 * <pre>
+	 * this + username + COMMAND_SPLITTER + pwHash
+	 * empfangen:
+	 * 	{@link #FALSE}, if the user could not be created
+	 * 	{@link #TRUE}, if the user could be created
+	 * </pre>
+	 */
+	public String createUserWithPwAndKey(String username, String pwHash, String encryptedEigener, String offener, boolean isEncryptedSending); 
 	
 	/**
 	 * <pre>
@@ -95,6 +104,6 @@ public interface ServerCommandExecuterInterface {
 
 	public String getMessage(List <String> befehle);
 
-	public String getAllMessages(String username, String pwHash); 
+	public String getAllMessages(String username, String pwHash);
 	
 }
