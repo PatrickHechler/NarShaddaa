@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="de/tafelwischenSecure/rsa/schlüssel/lesen/AssymetrischLesenEigener.java|de/tafelwischenSecure/rsa/schlüssel/lesen/AssymetrischLesenEigenerInterface.java|de/tafelwischenSecure/rsa/schlüssel/lesen/AssymetrischLesenOffen.java|de/tafelwischenSecure/rsa/schlüssel/lesen/AssymetrischLesenOffenerInterface.java|de/tafelwischenSecure/rsa/schlüssel/schreiben/AssymetrischSchreibenEigener.java|de/tafelwischenSecure/rsa/schlüssel/schreiben/AssymetrischSchreibenEigenerInterface.java|de/tafelwischenSecure/rsa/schlüssel/schreiben/AssymetrischSchreibenOffen.java|de/tafelwischenSecure/rsa/schlüssel/schreiben/AssymetrischSchreibenOffenInterface.java|de/tafelwischenSecure/rsa/schlüssel/schreiben/|de/tafelwischenSecure/rsa/schlüssel/lesen/|de/tafelwischenSecure/rsa/statischAlt/" kind="src" path="src"/>
+	<classpathentry kind="src" path="testsrc"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/hilfZeugs"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>

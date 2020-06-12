@@ -1,12 +1,12 @@
-package de.tafelwischenSecure.rsa.schlüssel.schreiben;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel.schreiben;
 
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.schreiben.SchreibenInterface;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.hechler.patrick.hilfZeugs.byteweiseÃ¼bertragen.Standard.schreiben.SchreibenInterface;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 
 public interface AssymetrischSchreibenOffenInterface extends SchreibenInterface{
 	
-	public AssymetrischOffen getSchlüssel();
+	public AssymetrischOffen getSchlÃ¼ssel();
 	
-	public String getSchlüsselAlsString();
+	public String getSchlÃ¼sselAlsString();
 	
 }

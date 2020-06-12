@@ -1,17 +1,17 @@
 package de.tafelwischenSecure.komm.sec;
 
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 
 public interface SecurityManagerInterface {
 	
 	/**
 	 * 
-	 * @param verschlüsseln
+	 * @param verschlÃ¼sseln
 	 * @param serverKey
 	 * 
 	 * @return
 	 */
-	public VerschlüsselteServerNachricht encrypt(String verschlüsseln, AssymetrischOffen serverKey);
+	public VerschlÃ¼sselteServerNachricht encrypt(String verschlÃ¼sseln, AssymetrischOffen serverKey);
 	
 	public String decrypt(long seed, String encryptedMessage);
 	

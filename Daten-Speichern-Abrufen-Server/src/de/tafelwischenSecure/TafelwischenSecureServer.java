@@ -160,14 +160,14 @@ public class TafelwischenSecureServer {
 		System.out.println("  enter '" + Constants.ADM_LISTMESSAGES + "' outputs the list of messages.");
 	}
 	
-	private void startForeground() throws CorruptServerDataException, IOException {
+	protected void startForeground() throws CorruptServerDataException, IOException {
 		System.out.println("Starte: " + new Date());
 		server = new Server(port, saveFolder);
 		server.load();
 		server.start();
 	}
 	
-	private void startBackground() throws IOException, CorruptServerDataException {
+	protected void startBackground() throws IOException, CorruptServerDataException {
 		System.out.println("Starte: " + new Date());
 		server = new Server(port, saveFolder);
 		server.load();

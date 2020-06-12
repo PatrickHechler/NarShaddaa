@@ -3,9 +3,9 @@ package de.tafelwischenSecure.benutzer;
 import java.io.IOException;
 
 import de.hechler.patrick.hilfZeugs.GlobalScanner;
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.bearbeiten.ByteweiseÜbertragen;
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.lesen.ArrayLesen;
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.verschlüsselt.lesen.VerschlüsseltLesen;
+import de.hechler.patrick.hilfZeugs.byteweiseÃœbertragen.Standard.bearbeiten.ByteweiseÃœbertragen;
+import de.hechler.patrick.hilfZeugs.byteweiseÃœbertragen.Standard.lesen.ArrayLesen;
+import de.hechler.patrick.hilfZeugs.byteweiseÃœbertragen.verschlÃ¼sselt.lesen.VerschlÃ¼sseltLesen;
 import de.hechler.patrick.hilfZeugs.umwandeln.StringByteConvert;
 import de.hechler.patrick.hilfZeugs.umwandeln.ZahlenUmwandeln;
 import de.tafelwischenSecure.Constants;
@@ -20,12 +20,12 @@ import de.tafelwischenSecure.message.Message;
 import de.tafelwischenSecure.message.MessageInterface;
 import de.tafelwischenSecure.message.ShortMessage;
 import de.tafelwischenSecure.message.ShortMessageInterface;
-import de.tafelwischenSecure.rsa.schlüssel.AssymetrischPaar;
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.AssymetrischPaar;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 import de.tafelwischenSecure.secure.ClientSidedSecurityManager;
 import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
-import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
+import de.tafelwischenSecure.secure.VerschlÃ¼sselteServerNachricht;
 
 public class Benutzer {
 	
@@ -37,7 +37,7 @@ public class Benutzer {
 	public static boolean sendEncrypted(String username, String pwHash, String destinyUsername, String title, String inhalt, AssymetrischOffen offenerKey)
 			throws IOException, UserDoesNotExistsExeption {
 		ClientSidedSecurityManagerInterface secure = new ClientSidedSecurityManager();
-		VerschlüsselteServerNachricht encryptedInhalt = secure.encrypt(inhalt, offenerKey);
+		VerschlÃ¼sselteServerNachricht encryptedInhalt = secure.encrypt(inhalt, offenerKey);
 		inhalt = encryptedInhalt.getEncryptedSeed() + Constants.COMMAND_SPLITTER + encryptedInhalt.getEncryptedMessage();
 		return sendMessage(username, pwHash, destinyUsername, title, inhalt);
 	}
@@ -56,7 +56,7 @@ public class Benutzer {
 		String senden = Constants.SEND_MESSAGE + username + Constants.COMMAND_SPLITTER + pwHash + Constants.COMMAND_SPLITTER + destinyUsername
 				+ Constants.COMMAND_SPLITTER + title + Constants.COMMAND_SPLITTER + inhalt;
 		
-		empfangen = Schnittstelle.verschlüsseltSenden(senden);
+		empfangen = Schnittstelle.verschlÃ¼sseltSenden(senden);
 		if (Constants.TRUE.equals(empfangen)) {
 			return true;
 		}
@@ -69,7 +69,7 @@ public class Benutzer {
 		if (Constants.FALSE.equals(empfangen)) {
 			throw new UserDoesNotExistsExeption(username);
 		}
-		empfangen = Schnittstelle.verschlüsseltSenden(Constants.GET_ALL_MESSAGES + username + Constants.COMMAND_SPLITTER + pwHash);
+		empfangen = Schnittstelle.verschlÃ¼sseltSenden(Constants.GET_ALL_MESSAGES + username + Constants.COMMAND_SPLITTER + pwHash);
 		if (Constants.WRONG_PW.equals(empfangen)) {
 			throw new WrongPasswortException();
 		}
@@ -77,19 +77,19 @@ public class Benutzer {
 			return new ShortMessageInterface[0];
 		}
 		String[] shrtMsgs = empfangen.split(Constants.COMMAND_SPLITTER);
-		ShortMessageInterface[] rückgabe = new ShortMessageInterface[Integer.parseInt(shrtMsgs[0])];
+		ShortMessageInterface[] rÃ¼ckgabe = new ShortMessageInterface[Integer.parseInt(shrtMsgs[0])];
 		int runde;
 //		messageID + messageTitle + sendFrom + sendTime 
-		for (runde = 0; runde < rückgabe.length; runde ++ ) {
+		for (runde = 0; runde < rÃ¼ckgabe.length; runde ++ ) {
 			long msgId;
 			try {
 				msgId = Long.parseLong(shrtMsgs[1 + (runde * 4)]);
 			} catch (NumberFormatException e) {
 				msgId = -1;
 			}
-			rückgabe[runde] = new ShortMessage(shrtMsgs[3 + (runde * 4)], shrtMsgs[4 + (runde * 4)], shrtMsgs[2 + (runde * 4)], msgId);
+			rÃ¼ckgabe[runde] = new ShortMessage(shrtMsgs[3 + (runde * 4)], shrtMsgs[4 + (runde * 4)], shrtMsgs[2 + (runde * 4)], msgId);
 		}
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
 	public static ShortMessageInterface[] hasNewMessages(String username, String pwHash) throws IOException, UserDoesNotExistsExeption, WrongPasswortException {
@@ -98,7 +98,7 @@ public class Benutzer {
 		if (Constants.FALSE.equals(empfangen)) {
 			throw new UserDoesNotExistsExeption(username);
 		}
-		empfangen = Schnittstelle.verschlüsseltSenden(Constants.HAS_HEW_MESSAGES + username + Constants.COMMAND_SPLITTER + pwHash);
+		empfangen = Schnittstelle.verschlÃ¼sseltSenden(Constants.HAS_HEW_MESSAGES + username + Constants.COMMAND_SPLITTER + pwHash);
 		if (Constants.WRONG_PW.equals(empfangen)) {
 			throw new WrongPasswortException();
 		}
@@ -106,19 +106,19 @@ public class Benutzer {
 			return new ShortMessageInterface[0];
 		}
 		String[] shrtMsgs = empfangen.split(Constants.COMMAND_SPLITTER);
-		ShortMessageInterface[] rückgabe = new ShortMessageInterface[Integer.parseInt(shrtMsgs[0])];
+		ShortMessageInterface[] rÃ¼ckgabe = new ShortMessageInterface[Integer.parseInt(shrtMsgs[0])];
 		int runde;
 //		messageID + messageTitle + sendFrom + sendTime 
-		for (runde = 0; runde < rückgabe.length; runde ++ ) {
+		for (runde = 0; runde < rÃ¼ckgabe.length; runde ++ ) {
 			long msgId;
 			try {
 				msgId = Long.parseLong(shrtMsgs[1 + (runde * 4)]);
 			} catch (NumberFormatException e) {
 				msgId = -1;
 			}
-			rückgabe[runde] = new ShortMessage(shrtMsgs[3 + (runde * 4)], shrtMsgs[4 + (runde * 4)], shrtMsgs[2 + (runde * 4)], msgId);
+			rÃ¼ckgabe[runde] = new ShortMessage(shrtMsgs[3 + (runde * 4)], shrtMsgs[4 + (runde * 4)], shrtMsgs[2 + (runde * 4)], msgId);
 		}
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
 	/* The Time, when the server got the message
@@ -129,13 +129,13 @@ public class Benutzer {
 			throws UserDoesNotExistsExeption, IOException {
 		try {
 			MessageInterface encMessage = getMessage(username, pwHash, id);
-			MessageInterface rückgabe;
+			MessageInterface rÃ¼ckgabe;
 			String encSeed = encMessage.getInhalt().split(Constants.COMMAND_SPLITTER)[0];
 			String encMsg = encMessage.getInhalt().split(Constants.COMMAND_SPLITTER)[1];
-			long seed = eigenerKey.entschlüsselnLong(ZahlenUmwandeln.hexZuByteArray(encSeed));
-			String inhalt = ByteweiseÜbertragen.Verschlüsselt.entschlüsselnString(ZahlenUmwandeln.hexZuByteArray(encMsg), seed);
-			rückgabe = new Message(encMessage.getSendFrom(), encMessage.getTime(), encMessage.getTitle(), inhalt, id);
-			return rückgabe;
+			long seed = eigenerKey.entschlÃ¼sselnLong(ZahlenUmwandeln.hexZuByteArray(encSeed));
+			String inhalt = ByteweiseÃœbertragen.VerschlÃ¼sselt.entschlÃ¼sselnString(ZahlenUmwandeln.hexZuByteArray(encMsg), seed);
+			rÃ¼ckgabe = new Message(encMessage.getSendFrom(), encMessage.getTime(), encMessage.getTitle(), inhalt, id);
+			return rÃ¼ckgabe;
 		} catch (RuntimeException e) {
 			System.err.println("The encrypted message was wrong: " + e.toString());
 			return new Message("", "", "", "");
@@ -161,13 +161,13 @@ public class Benutzer {
 	}
 	
 	public static AssymetrischOffen getOffenFromUser(String username) throws IOException, UserDoesNotExistsExeption {
-		AssymetrischOffen rückgabe;
+		AssymetrischOffen rÃ¼ckgabe;
 		String empf = Schnittstelle.senden(Constants.GET_PUBLIC_KEY_FROM_USER + username);
 		if (Constants.FALSE.equals(empf)) {
 			throw new UserDoesNotExistsExeption(username);
 		}
-		rückgabe = new AssymetrischOffen(empf);
-		return rückgabe;
+		rÃ¼ckgabe = new AssymetrischOffen(empf);
+		return rÃ¼ckgabe;
 	}
 	
 	/**
@@ -197,18 +197,18 @@ public class Benutzer {
 		if ( !Constants.TRUE.equals(empfangen)) {
 			if (Constants.UNKNOWN_COMMAND.equals(empfangen)) {
 				throw new RuntimeException("Der Server sollte das Commando '" + Constants.USER_EXISTS + username + "' kennen." + System.lineSeparator()
-						+ "Allerdings wurde das Kommando für einen unbekannten befehl zurückgeschickt (" + empfangen + ").");
+						+ "Allerdings wurde das Kommando fÃ¼r einen unbekannten befehl zurÃ¼ckgeschickt (" + empfangen + ").");
 			}
 			throw new RuntimeException("By cecking the existence of the user " + username + " the server answered wrongly.");
 		}
 		
-		empfangen = Schnittstelle.verschlüsseltSenden(Constants.REGISTER_USER + username + Constants.COMMAND_SPLITTER + Rules.generatePwHash(passwort));
+		empfangen = Schnittstelle.verschlÃ¼sseltSenden(Constants.REGISTER_USER + username + Constants.COMMAND_SPLITTER + Rules.generatePwHash(passwort));
 		if (Constants.FALSE.equals(empfangen) || Constants.WRONG_PW.equals(empfangen)) {
 			throw new WrongPasswortException();
 		}
 		byte[] bytes = ZahlenUmwandeln.hexZuByteArray(empfangen);
 		
-		VerschlüsseltLesen leser = new VerschlüsseltLesen(new ArrayLesen(bytes), passwort);
+		VerschlÃ¼sseltLesen leser = new VerschlÃ¼sseltLesen(new ArrayLesen(bytes), passwort);
 		String eigenKeyStr = StringByteConvert.bytesZuString(leser.getBytes());
 		AssymetrischEigener privateUserKey = new AssymetrischEigener(eigenKeyStr);
 		return privateUserKey;
@@ -239,7 +239,7 @@ public class Benutzer {
 			try {
 				return Long.parseLong(eingabe);
 			} catch (NumberFormatException e) {
-				System.out.println(eingabe + " ist kein gültiges Passwort");
+				System.out.println(eingabe + " ist kein gÃ¼ltiges Passwort");
 				continue;
 			}
 		} while (true);
@@ -275,7 +275,7 @@ public class Benutzer {
 			} catch (UserAlreadyExistsException uaee) {
 				System.out.println("Den Benutzernamen " + uaee.getUsername() + " gibt es bereits. Suche dir einen anderen aus.");
 			} catch (InvalidUsernameExeption iue) {
-				System.out.println(iue.getUsername() + " ist ein ungültiger Benutzername.");
+				System.out.println(iue.getUsername() + " ist ein ungÃ¼ltiger Benutzername.");
 			}
 		}
 	}
@@ -293,7 +293,7 @@ public class Benutzer {
 	 * @throws InvalidUsernameExeption
 	 */
 	public static UserErgebnis erstellen(String username) throws IOException, UserAlreadyExistsException, InvalidUsernameExeption {
-//		Grundlegende Prüfungen.
+//		Grundlegende PrÃ¼fungen.
 		{
 			Schnittstelle.checkServerConnection();
 			if ( !Rules.isAcceptableName(username)) {
@@ -303,19 +303,19 @@ public class Benutzer {
 				throw new UserAlreadyExistsException(username);
 			}
 		}
-		String empfangen = Schnittstelle.verschlüsseltSenden(Constants.SEND_NEW_USER_TO_SERVER + username);
+		String empfangen = Schnittstelle.verschlÃ¼sseltSenden(Constants.SEND_NEW_USER_TO_SERVER + username);
 		if (Constants.FALSE.equals(empfangen)) {
 			try {
 //				Warten, um dem Server Zeit zu geben, damit dieser seine Daten aktualisieren kann.
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
-//			prüfen, ob der Server online ist
+//			prÃ¼fen, ob der Server online ist
 			String serverExi = Schnittstelle.senden(Constants.IS_ALIVE);
 			if (Constants.FALSE.contentEquals(serverExi)) {
 				throw new RuntimeException("There is no server");
 			}
-//			Erneut prüfen, ob der Benutzername bereits vergeben ist und einen Dementsprechenden Fehler werfen.
+//			Erneut prÃ¼fen, ob der Benutzername bereits vergeben ist und einen Dementsprechenden Fehler werfen.
 			String userExi = Schnittstelle.senden(Constants.USER_EXISTS + username);
 			if (Constants.TRUE.equals(userExi)) {
 				throw new UserAlreadyExistsException(username);
@@ -329,7 +329,7 @@ public class Benutzer {
 		AssymetrischEigener userKey;
 		
 		String encPrivKey = userThings[1];
-		String privKeyString = ByteweiseÜbertragen.Verschlüsselt.entschlüsselnString(ZahlenUmwandeln.hexZuByteArray(encPrivKey), password);
+		String privKeyString = ByteweiseÃœbertragen.VerschlÃ¼sselt.entschlÃ¼sselnString(ZahlenUmwandeln.hexZuByteArray(encPrivKey), password);
 		userKey = new AssymetrischEigener(privKeyString, username);
 		return new UserErgebnis(userKey, password);
 	}
@@ -342,8 +342,8 @@ public class Benutzer {
 		keyPaar.setName(username);
 		String keyStringOffen = keyPaar.getOffenAlsString();
 		String keyStringEigener = keyPaar.getEigenenAlsString();
-		String encryptedEigener = ZahlenUmwandeln.zuHex(ByteweiseÜbertragen.Verschlüsselt.verschlüsseln(keyStringEigener, passwort));
-		String empfangen = Schnittstelle.verschlüsseltSenden(Constants.SEND_NEW_USER_WITH_PWHASH_AND_KEY_TO_SERVER + username + Constants.COMMAND_SPLITTER
+		String encryptedEigener = ZahlenUmwandeln.zuHex(ByteweiseÃœbertragen.VerschlÃ¼sselt.verschlÃ¼sseln(keyStringEigener, passwort));
+		String empfangen = Schnittstelle.verschlÃ¼sseltSenden(Constants.SEND_NEW_USER_WITH_PWHASH_AND_KEY_TO_SERVER + username + Constants.COMMAND_SPLITTER
 				+ Rules.generatePwHash(passwort) + Constants.COMMAND_SPLITTER + encryptedEigener + Constants.COMMAND_SPLITTER + keyStringOffen);
 		if (Constants.FALSE.equals(empfangen)) {
 			System.err.println("The server did not create the new user.");

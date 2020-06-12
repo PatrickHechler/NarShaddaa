@@ -60,8 +60,8 @@ class KommunikationTest {
 	@Test
 	void testSendMessageWithUmlaut() throws IOException {
 		KommunikationInterface komm = new Kommunikation("localhost", LH_SERVER_PORT);
-		String empfangen = komm.sendMessage("הצüßִײÜ sind auch UTF Zeichen");
-		assertEquals("echo: הצüßִײÜ sind auch UTF Zeichen", empfangen);
+		String empfangen = komm.sendMessage("ֳ¼ֳ¼ֳ¼ֳ¼ֳ¼ֳ¼ֳ¼ sind auch UTF Zeichen");
+		assertEquals("echo: ֳ¼ֳ¼ֳ¼ֳ¼ֳ¼ֳ¼ֳ¼ sind auch UTF Zeichen", empfangen);
 	}
 	
 	@Test

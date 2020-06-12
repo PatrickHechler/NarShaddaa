@@ -9,23 +9,23 @@ import java.security.spec.InvalidKeySpecException;
 
 import org.junit.jupiter.api.Test;
 
-class AssymetrischVerschlüsselnTest3 {
+class AssymetrischVerschlÃ¼sselnTest3 {
 	
 	@Test
 	void testGeneratePublicKeyFromString() throws NoSuchAlgorithmException, InvalidKeySpecException {
-		PublicKey offen = AssymetrischVerschlüsseln.generator(null).getPublic();
-		String schlüssel = AssymetrischVerschlüsseln.toString(offen);
+		PublicKey offen = AssymetrischVerschlÃ¼sseln.generator(null).getPublic();
+		String schlÃ¼ssel = AssymetrischVerschlÃ¼sseln.toString(offen);
 		
-		assertEquals(offen, AssymetrischVerschlüsseln.generatePublicKeyFromString(schlüssel));
+		assertEquals(offen, AssymetrischVerschlÃ¼sseln.generatePublicKeyFromString(schlÃ¼ssel));
 		
 	}
 	
 	@Test
 	void testGeneratePrivateKeyFromString() throws NoSuchAlgorithmException, InvalidKeySpecException {
-		PrivateKey zu = AssymetrischVerschlüsseln.generator(null).getPrivate();
-		String schlüssel = AssymetrischVerschlüsseln.toString(zu);
+		PrivateKey zu = AssymetrischVerschlÃ¼sseln.generator(null).getPrivate();
+		String schlÃ¼ssel = AssymetrischVerschlÃ¼sseln.toString(zu);
 		
-		assertEquals(zu, AssymetrischVerschlüsseln.generatePrivateKeyFromString(schlüssel));
+		assertEquals(zu, AssymetrischVerschlÃ¼sseln.generatePrivateKeyFromString(schlÃ¼ssel));
 	}
 	
 }

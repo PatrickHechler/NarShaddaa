@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import de.tafelwischenSecure.komm.Kommunikation;
 import de.tafelwischenSecure.komm.KommunikationInterface;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 import de.tafelwischenSecure.secure.ClientSidedSecurityManager;
 import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
-import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
+import de.tafelwischenSecure.secure.VerschlÃ¼sselteServerNachricht;
 
 public class Schnittstelle {
 	
@@ -53,15 +53,15 @@ public class Schnittstelle {
 		return komm.sendMessage(senden);
 	}
 	
-	public static String verschlüsseltSenden(String verschlüsselnUndSenden) throws IOException {
+	public static String verschlÃ¼sseltSenden(String verschlÃ¼sselnUndSenden) throws IOException {
 		checkServerConfig();
 		checkSecurityManager();
 		String serverKeyString = senden(Constants.GET_PUBLIC_KEY_FROM_SERVER);
 		AssymetrischOffen serverKey;
-		VerschlüsselteServerNachricht message;
+		VerschlÃ¼sselteServerNachricht message;
 		String empfangen;
 		serverKey = new AssymetrischOffen(serverKeyString);
-		message = secure.encrypt(verschlüsselnUndSenden, serverKey);
+		message = secure.encrypt(verschlÃ¼sselnUndSenden, serverKey);
 		empfangen = senden(
 				Constants.ENCRYPTED + Constants.COMMAND_SPLITTER + message.getEncryptedSeed() + Constants.COMMAND_SPLITTER + message.getEncryptedMessage());
 		return secure.decrypt(message.getSeed(), empfangen);

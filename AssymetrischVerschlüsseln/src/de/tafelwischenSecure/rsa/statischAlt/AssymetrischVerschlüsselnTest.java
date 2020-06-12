@@ -8,21 +8,21 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.lesen.DateiLesen;
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.schreiben.DateiSchreiben;
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.verschlüsselt.schreiben.VerschlüsseltSchreiben;
+import de.hechler.patrick.hilfZeugs.byteweiseÃ¼bertragen.Standard.lesen.DateiLesen;
+import de.hechler.patrick.hilfZeugs.byteweiseÃ¼bertragen.Standard.schreiben.DateiSchreiben;
+import de.hechler.patrick.hilfZeugs.byteweiseÃ¼bertragen.verschlÃ¼sselt.schreiben.VerschlÃ¼sseltSchreiben;
 
-class AssymetrischVerschlüsselnTest {
+class AssymetrischVerschlÃ¼sselnTest {
 	
-	VerschlüsseltSchreiben schreiber;
+	VerschlÃ¼sseltSchreiben schreiber;
 	DateiLesen leser;
 	byte[] seed;
-	KeyPair schlüssel;
+	KeyPair schlÃ¼ssel;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		leser = new DateiLesen("test/orig.txt");
-		schreiber = new VerschlüsseltSchreiben(new DateiSchreiben("test/ver.txt", true));
+		schreiber = new VerschlÃ¼sseltSchreiben(new DateiSchreiben("test/ver.txt", true));
 	}
 	
 	@AfterEach
@@ -36,53 +36,53 @@ class AssymetrischVerschlüsselnTest {
 		
 		long runde;
 		
-		for (runde = 0; runde < leser.getGröße(); runde ++ ) {
-			schreiber.schreibeByte(leser.getNächstesByte());
+		for (runde = 0; runde < leser.getGrÃ¼ÃŸe(); runde ++ ) {
+			schreiber.schreibeByte(leser.getNÃ¼chstesByte());
 		}
 		
-		seed = longZuByteArr(schreiber.getVerschlüsselnungsZahl());
+		seed = longZuByteArr(schreiber.getVerschlÃ¼sselnungsZahl());
 		
-		schlüssel = AssymetrischVerschlüsseln.generator(null);
+		schlÃ¼ssel = AssymetrischVerschlÃ¼sseln.generator(null);
 		
-		byte[] seedVerschlüsselt = AssymetrischVerschlüsseln.verschlüsseln(schlüssel.getPublic(), seed.clone());
+		byte[] seedVerschlÃ¼sselt = AssymetrischVerschlÃ¼sseln.verschlÃ¼sseln(schlÃ¼ssel.getPublic(), seed.clone());
 		
-		byte[] seedEntschlüsselt = AssymetrischVerschlüsseln.entschlüsseln(schlüssel.getPrivate(), seedVerschlüsselt);
+		byte[] seedEntschlÃ¼sselt = AssymetrischVerschlÃ¼sseln.entschlÃ¼sseln(schlÃ¼ssel.getPrivate(), seedVerschlÃ¼sselt);
 		
-		for (runde = 0; runde < seedEntschlüsselt.length; runde ++ ) {
-			assertEquals(seed[(int) runde], seedEntschlüsselt[(int) runde]);
+		for (runde = 0; runde < seedEntschlÃ¼sselt.length; runde ++ ) {
+			assertEquals(seed[(int) runde], seedEntschlÃ¼sselt[(int) runde]);
 		}
 		
 		leser.close();
 		schreiber.close();
 		
 		leser = new DateiLesen("test/ver.txt");
-		schreiber = new VerschlüsseltSchreiben(new DateiSchreiben("test/ent.txt", true), byteArrZuLong(seedEntschlüsselt));
+		schreiber = new VerschlÃ¼sseltSchreiben(new DateiSchreiben("test/ent.txt", true), byteArrZuLong(seedEntschlÃ¼sselt));
 		
-		for (runde = 0; runde < leser.getGröße(); runde ++ ) {
-			schreiber.schreibeByte(leser.getNächstesByte());
+		for (runde = 0; runde < leser.getGrÃ¼ÃŸe(); runde ++ ) {
+			schreiber.schreibeByte(leser.getNÃ¼chstesByte());
 		}
 		
 	}
 	
 	static byte[] longZuByteArr(long umwandeln) {
-		byte[] rückgabe = new byte[8];
+		byte[] rÃ¼ckgabe = new byte[8];
 		int runde;
 		
-		for (runde = 0; runde < rückgabe.length; runde ++ ) {
-			rückgabe[runde] = (byte) ( (umwandeln >> (56 - runde * 8)) & 0xFF);
+		for (runde = 0; runde < rÃ¼ckgabe.length; runde ++ ) {
+			rÃ¼ckgabe[runde] = (byte) ( (umwandeln >> (56 - runde * 8)) & 0xFF);
 		}
 		
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
 	static long byteArrZuLong(byte[] umwandeln) {
-		long rückgabe = 0;
+		long rÃ¼ckgabe = 0;
 		
 		for (int runde = 0; runde < umwandeln.length; runde ++ ) {
-			rückgabe = (rückgabe << 8) + (((long) umwandeln[runde]) & 0xFF);
+			rÃ¼ckgabe = (rÃ¼ckgabe << 8) + (((long) umwandeln[runde]) & 0xFF);
 		}
 		
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
 }

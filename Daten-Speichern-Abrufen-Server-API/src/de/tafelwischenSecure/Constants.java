@@ -43,7 +43,7 @@ public class Constants {
 	@Command(spezify = CommandEnum.boolisch)
 	public static final String TRUE = "true";
 	@Command(spezify = CommandEnum.connecter)
-	public static final String COMMAND_SPLITTER = "⁰";
+	public static final String COMMAND_SPLITTER = "\u2070";    // "⁰"
 	/**
 	 * this + encryptedSymetricSeed + COMMAND_SPLITTER + encryptedMessage
 	 */

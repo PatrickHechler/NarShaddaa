@@ -1,32 +1,32 @@
 package de.tafelwischenSecure.komm.sec;
 
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.lesen.ArrayLesen;
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.schreiben.ArraySchreiben;
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.verschlüsselt.lesen.VerschlüsseltLesen;
+import de.hechler.patrick.hilfZeugs.byteweiseÃœbertragen.Standard.lesen.ArrayLesen;
+import de.hechler.patrick.hilfZeugs.byteweiseÃœbertragen.Standard.schreiben.ArraySchreiben;
+import de.hechler.patrick.hilfZeugs.byteweiseÃœbertragen.verschlÃ¼sselt.lesen.VerschlÃ¼sseltLesen;
 import de.hechler.patrick.hilfZeugs.umwandeln.StringByteConvert;
 import de.hechler.patrick.hilfZeugs.umwandeln.ZahlenUmwandeln;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 
 public class ClientSidedSecurityManager implements SecurityManagerInterface {
 	
 	@Override
-	public VerschlüsselteServerNachricht encrypt(String verschlüsseln, AssymetrischOffen serverKey) {
-		byte[] klartextBytes = StringByteConvert.stringZuBytes(verschlüsseln);
-		VerschlüsseltLesen leser = new VerschlüsseltLesen(new ArrayLesen(klartextBytes));
-		byte[] verschlüsselteBytes;
+	public VerschlÃ¼sselteServerNachricht encrypt(String verschlÃ¼sseln, AssymetrischOffen serverKey) {
+		byte[] klartextBytes = StringByteConvert.stringZuBytes(verschlÃ¼sseln);
+		VerschlÃ¼sseltLesen leser = new VerschlÃ¼sseltLesen(new ArrayLesen(klartextBytes));
+		byte[] verschlÃ¼sselteBytes;
 		try {
-			verschlüsselteBytes = leser.getBytes();
+			verschlÃ¼sselteBytes = leser.getBytes();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		String encryptedKey;
-		encryptedKey = ZahlenUmwandeln.zuHex(serverKey.verschlüsseln(leser.getVerschlüsselnungsZahl()));
-		return new VerschlüsselteServerNachricht(leser.getVerschlüsselnungsZahl(), encryptedKey, ZahlenUmwandeln.zuHex(verschlüsselteBytes));
+		encryptedKey = ZahlenUmwandeln.zuHex(serverKey.verschlÃ¼sseln(leser.getVerschlÃ¼sselnungsZahl()));
+		return new VerschlÃ¼sselteServerNachricht(leser.getVerschlÃ¼sselnungsZahl(), encryptedKey, ZahlenUmwandeln.zuHex(verschlÃ¼sselteBytes));
 	}
 	
 	@Override
 	public String decrypt(long seed, String encryptedMessage) {
-		VerschlüsseltLesen leser = new VerschlüsseltLesen(new ArrayLesen(ZahlenUmwandeln.hexZuByteArray(encryptedMessage)), seed);
+		VerschlÃ¼sseltLesen leser = new VerschlÃ¼sseltLesen(new ArrayLesen(ZahlenUmwandeln.hexZuByteArray(encryptedMessage)), seed);
 		ArraySchreiben schreiber = new ArraySchreiben(ZahlenUmwandeln.hexZuByteArray(encryptedMessage).length);
 		byte[] bytes;
 		try {

@@ -1,4 +1,4 @@
-package de.tafelwischenSecure.rsa.schlüssel.eigener;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -19,36 +19,36 @@ import de.hechler.patrick.hilfZeugs.umwandeln.ZahlenUmwandeln;
 
 public class AssymetrischEigener implements AssymetrischEigenerInterface {
 	
-	private PrivateKey schlüssel;
+	private PrivateKey schlÃ¼ssel;
 	private Cipher cipher;
 	private String name;
 	
 	private void ciperInit() {
 		try {
-			cipher = Cipher.getInstance("RSA");
-			cipher.init(Cipher.DECRYPT_MODE, schlüssel);
+			cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+			cipher.init(Cipher.DECRYPT_MODE, schlÃ¼ssel);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
-	public AssymetrischEigener(String schlüsselAlsString) {
-		this(schlüsselAlsString.split("=")[0], (schlüsselAlsString.split("=").length > 1) ? schlüsselAlsString.split("=")[1] : "?");
+	public AssymetrischEigener(String schlÃ¼sselAlsString) {
+		this(schlÃ¼sselAlsString.split("=")[0], (schlÃ¼sselAlsString.split("=").length > 1) ? schlÃ¼sselAlsString.split("=")[1] : "?");
 	}
 	
-	public AssymetrischEigener(PrivateKey schlüssel) {
-		this(schlüssel, "?");
+	public AssymetrischEigener(PrivateKey schlÃ¼ssel) {
+		this(schlÃ¼ssel, "?");
 	}
 	
-	public AssymetrischEigener(String schlüsselAlsString, String neuerName) {
-		byte[] bytes = ZahlenUmwandeln.hexZuByteArray(schlüsselAlsString.split("=")[0]);
+	public AssymetrischEigener(String schlÃ¼sselAlsString, String neuerName) {
+		byte[] bytes = ZahlenUmwandeln.hexZuByteArray(schlÃ¼sselAlsString.split("=")[0]);
 		if (neuerName == null || neuerName.length() < 1) {
 			neuerName = "?";
 		}
 		KeyFactory kf;
 		try {
 			kf = KeyFactory.getInstance("RSA");
-			this.schlüssel = kf.generatePrivate(new PKCS8EncodedKeySpec(bytes));
+			this.schlÃ¼ssel = kf.generatePrivate(new PKCS8EncodedKeySpec(bytes));
 			this.name = neuerName;
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			throw new RuntimeException(e);
@@ -57,48 +57,48 @@ public class AssymetrischEigener implements AssymetrischEigenerInterface {
 		ciperInit();
 	}
 	
-	public AssymetrischEigener(PrivateKey schlüssel, String name) {
+	public AssymetrischEigener(PrivateKey schlÃ¼ssel, String name) {
 		if (name == null || name.length() < 1) {
 			name = "?";
 		}
 		
-		this.schlüssel = schlüssel;
+		this.schlÃ¼ssel = schlÃ¼ssel;
 		this.name = name;
 		ciperInit();
 	}
 	
 	@Override
-	public long entschlüsselnLong(byte[] entschlüsseln) {
-		return ZahlenUmwandeln.zuLong(entschlüsseln(entschlüsseln));
+	public long entschlÃ¼sselnLong(byte[] entschlÃ¼sseln) {
+		return ZahlenUmwandeln.zuLong(entschlÃ¼sseln(entschlÃ¼sseln));
 	}
 	
 	@Override
-	public int entschlüsselnInt(byte[] entschlüsseln) {
-		return ZahlenUmwandeln.zuInt(entschlüsseln(entschlüsseln));
+	public int entschlÃ¼sselnInt(byte[] entschlÃ¼sseln) {
+		return ZahlenUmwandeln.zuInt(entschlÃ¼sseln(entschlÃ¼sseln));
 	}
 	
 	@Override
-	public byte[] entschlüsseln(byte[] entschlüsseln) {
+	public byte[] entschlÃ¼sseln(byte[] entschlÃ¼sseln) {
 		try {
-			return cipher.doFinal(entschlüsseln);
+			return cipher.doFinal(entschlÃ¼sseln);
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	@Override
-	public byte[] entschlüsseln(String entschlüsseln) {
-		return entschlüsseln(entschlüsseln.getBytes(StandardCharsets.UTF_8));
+	public byte[] entschlÃ¼sseln(String entschlÃ¼sseln) {
+		return entschlÃ¼sseln(entschlÃ¼sseln.getBytes(StandardCharsets.UTF_8));
 	}
 	
 	@Override
-	public byte[] entschlüsseln(String entschlüsseln, String charset) throws UnsupportedEncodingException {
-		return entschlüsseln(entschlüsseln.getBytes(charset));
+	public byte[] entschlÃ¼sseln(String entschlÃ¼sseln, String charset) throws UnsupportedEncodingException {
+		return entschlÃ¼sseln(entschlÃ¼sseln.getBytes(charset));
 	}
 	
 	@Override
-	public byte[] entschlüsseln(String entschlüsseln, Charset charset) {
-		return entschlüsseln(entschlüsseln.getBytes(charset));
+	public byte[] entschlÃ¼sseln(String entschlÃ¼sseln, Charset charset) {
+		return entschlÃ¼sseln(entschlÃ¼sseln.getBytes(charset));
 	}
 	
 	public String getName() {
@@ -115,7 +115,7 @@ public class AssymetrischEigener implements AssymetrischEigenerInterface {
 	
 	@Override
 	public String toString() {
-		return ZahlenUmwandeln.zuHex(schlüssel.getEncoded()) + "=" + name;
+		return ZahlenUmwandeln.zuHex(schlÃ¼ssel.getEncoded()) + "=" + name;
 	}
 	
 	@Override
@@ -137,11 +137,11 @@ public class AssymetrischEigener implements AssymetrischEigenerInterface {
 			}
 		}
 		
-		if (schlüssel == null ^ eigener.schlüssel == null) {
+		if (schlÃ¼ssel == null ^ eigener.schlÃ¼ssel == null) {
 			return false;
 		}
-		if (schlüssel != null) {
-			if ( !schlüssel.equals(eigener.schlüssel)) {
+		if (schlÃ¼ssel != null) {
+			if ( !schlÃ¼ssel.equals(eigener.schlÃ¼ssel)) {
 				return false;
 			}
 		}

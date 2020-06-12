@@ -1,7 +1,7 @@
-package de.tafelwischenSecure.rsa.schlüssel;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel;
 
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigenerInterface;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffenInterface;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigenerInterface;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffenInterface;
 
 public interface AssymetrischPaarInterface extends AssymetrischEigenerInterface, AssymetrischOffenInterface {
 	

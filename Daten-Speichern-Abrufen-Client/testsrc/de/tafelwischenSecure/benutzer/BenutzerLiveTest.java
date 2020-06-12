@@ -8,17 +8,18 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import de.tafelwischenSecure.Constants;
 import de.tafelwischenSecure.Schnittstelle;
 import de.tafelwischenSecure.exceptions.UserAlreadyExistsException;
 import de.tafelwischenSecure.exceptions.UserException;
 import de.tafelwischenSecure.exceptions.WrongPasswortException;
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 
 class BenutzerLiveTest {
 	
 	private static final String USERNAME = "Patrick_Hechler";
-	private static final long PASSWORT = -8092527261744784176L;
+	private static final long PASSWORT = -1190983749827095235L;
 	
 	private static final long LONGTOENCRYPT = 12348765936489L;
 
@@ -28,14 +29,14 @@ class BenutzerLiveTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Schnittstelle.configServer("localhost", 5869);
+		Schnittstelle.configServer("localhost", Constants.DEAFULT_PORT);
 	}
 	
 	
 	@Test
 	void testLiveServerCommands() throws IOException, UserException, WrongPasswortException {
 		int serverVersion = Schnittstelle.getServerVersion();
-		assertEquals(3, serverVersion);
+		assertEquals(5, serverVersion);
 		try {
 			UserErgebnis erstellen = Benutzer.erstellen(USERNAME);
 			String errMsg = "Please change the JUNIT Test:\r\nprivate static final long PASSWORT = "+erstellen.getUserPassword()+"l;";
@@ -62,8 +63,8 @@ class BenutzerLiveTest {
 		assertNotNull(offenKey);
 		
 		
-		byte[] encryptedSeedForUser = offenKey.verschlüsseln(LONGTOENCRYPT);
-		long decryptedSeed = eigenerKey.entschlüsselnLong(encryptedSeedForUser);
+		byte[] encryptedSeedForUser = offenKey.verschlÃ¼sseln(LONGTOENCRYPT);
+		long decryptedSeed = eigenerKey.entschlÃ¼sselnLong(encryptedSeedForUser);
 		
 		assertEquals(LONGTOENCRYPT, decryptedSeed);
 	}

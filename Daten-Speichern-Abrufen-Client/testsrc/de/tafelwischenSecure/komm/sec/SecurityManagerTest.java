@@ -10,15 +10,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.hechler.patrick.hilfZeugs.umwandeln.ZahlenUmwandeln;
-import de.tafelwischenSecure.rsa.schlüssel.AssymetrischPaar;
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.AssymetrischPaar;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 import de.tafelwischenSecure.secure.ClientSidedSecurityManager;
-import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
+import de.tafelwischenSecure.secure.VerschlÃ¼sselteServerNachricht;
 
 class SecurityManagerTest {
 	
-	private static final String PLAINTEXT = "Dieser Text mit Umlauten äöüßÄÖÜ soll\r\n  verschlüsselt werden!\r\n\r\n";
+	private static final String PLAINTEXT = "Dieser Text mit Umlauten Ã¼Ã¼Ã¼Ã¼Ã¼Ã¼Ã¼ soll\r\n  verschlÃ¼sselt werden!\r\n\r\n";
 	private ClientSidedSecurityManager sm;
 	private static AssymetrischPaar keyPair; 
 	private static AssymetrischEigener privateKey;
@@ -39,17 +39,17 @@ class SecurityManagerTest {
 	
 	@Test
 	void testSeedEncryption() throws IllegalBlockSizeException, BadPaddingException {
-		VerschlüsselteServerNachricht encServerMsg = sm.encrypt(PLAINTEXT, publicKey);
+		VerschlÃ¼sselteServerNachricht encServerMsg = sm.encrypt(PLAINTEXT, publicKey);
 		assertNotNull(encServerMsg);
 		byte[] encryptedSeedBytes = ZahlenUmwandeln.hexZuByteArray(encServerMsg.getEncryptedSeed());
-		byte[] decryptedSeedBytes = privateKey.entschlüsseln(encryptedSeedBytes);
+		byte[] decryptedSeedBytes = privateKey.entschlÃ¼sseln(encryptedSeedBytes);
 		long decryptedSeed = ZahlenUmwandeln.zuLong(decryptedSeedBytes);
 		assertEquals(encServerMsg.getSeed(), decryptedSeed);
 	}
 	
 	@Test
 	void testDecrypt() throws IllegalBlockSizeException, BadPaddingException {
-		VerschlüsselteServerNachricht encServerMsg = sm.encrypt(PLAINTEXT, publicKey);
+		VerschlÃ¼sselteServerNachricht encServerMsg = sm.encrypt(PLAINTEXT, publicKey);
 		assertNotNull(encServerMsg);
 		String decryptedMessage = sm.decrypt(encServerMsg.getSeed(), encServerMsg.getEncryptedMessage());
 		assertEquals(PLAINTEXT, decryptedMessage);

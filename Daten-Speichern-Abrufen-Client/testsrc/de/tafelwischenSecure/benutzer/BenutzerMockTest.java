@@ -17,16 +17,16 @@ import de.tafelwischenSecure.Schnittstelle;
 import de.tafelwischenSecure.exceptions.UserAlreadyExistsException;
 import de.tafelwischenSecure.exceptions.UserException;
 import de.tafelwischenSecure.komm.KommunikationInterface;
-import de.tafelwischenSecure.rsa.schlüssel.AssymetrischPaar;
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.AssymetrischPaar;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
 import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
-import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
+import de.tafelwischenSecure.secure.VerschlÃ¼sselteServerNachricht;
 
 class BenutzerMockTest {
 	
 	private static final String NEW_USER_THING_WHICH_COME_FROM_SERVER = "Das sind die sachen, des neuen Benutzers";
-	private static final VerschlüsselteServerNachricht VERSCHLÜSSELT_NEW_USER_SENDING = new VerschlüsselteServerNachricht(1254l, "4521",
-			"Dies Ist Verschlüsselt.");
+	private static final VerschlÃ¼sselteServerNachricht VERSCHLÃ¼SSELT_NEW_USER_SENDING = new VerschlÃ¼sselteServerNachricht(1254l, "4521",
+			"Dies Ist VerschlÃ¼sselt.");
 	private static final String NEW_USERNAME = "PATRICKhechler";
 	private static final long EXISTING_USER_PW = 12548L;
 	private static final long NEW_USER_PW = 68415564l;
@@ -81,10 +81,10 @@ class BenutzerMockTest {
 		when(kommMock.sendMessage(Constants.USER_EXISTS + NEW_USERNAME)).thenReturn(Constants.FALSE);
 		
 		when(kommMock.sendMessage(Constants.GET_PUBLIC_KEY_FROM_SERVER)).thenReturn(SERVER_PUP_KEY);
-		when(secureMock.encrypt(any(), any())).thenReturn(VERSCHLÜSSELT_NEW_USER_SENDING);
-		when(kommMock.sendMessage(Constants.ENCRYPTED + Constants.COMMAND_SPLITTER + VERSCHLÜSSELT_NEW_USER_SENDING.getEncryptedSeed() + Constants.COMMAND_SPLITTER
-				+ VERSCHLÜSSELT_NEW_USER_SENDING.getEncryptedMessage())).thenReturn(NEW_USER_THING_WHICH_COME_FROM_SERVER);
-		when(secureMock.decrypt(VERSCHLÜSSELT_NEW_USER_SENDING.getSeed(), NEW_USER_THING_WHICH_COME_FROM_SERVER))
+		when(secureMock.encrypt(any(), any())).thenReturn(VERSCHLÃ¼SSELT_NEW_USER_SENDING);
+		when(kommMock.sendMessage(Constants.ENCRYPTED + Constants.COMMAND_SPLITTER + VERSCHLÃ¼SSELT_NEW_USER_SENDING.getEncryptedSeed() + Constants.COMMAND_SPLITTER
+				+ VERSCHLÃ¼SSELT_NEW_USER_SENDING.getEncryptedMessage())).thenReturn(NEW_USER_THING_WHICH_COME_FROM_SERVER);
+		when(secureMock.decrypt(VERSCHLÃ¼SSELT_NEW_USER_SENDING.getSeed(), NEW_USER_THING_WHICH_COME_FROM_SERVER))
 				.thenReturn(NEW_USER_PW + Constants.COMMAND_SPLITTER + NEW_USER_PRIKEY_ENC);
 		Schnittstelle.setKommunikation(kommMock);
 		Schnittstelle.setSecurityManager(secureMock);
@@ -101,10 +101,10 @@ class BenutzerMockTest {
 		when(kommMock.sendMessage(Constants.USER_EXISTS + NEW_USERNAME)).thenReturn(Constants.FALSE);
 		
 		when(kommMock.sendMessage(Constants.GET_PUBLIC_KEY_FROM_SERVER)).thenReturn(SERVER_PUP_KEY);
-		when(secureMock.encrypt(any(), any())).thenReturn(VERSCHLÜSSELT_NEW_USER_SENDING);
-		when(kommMock.sendMessage(Constants.ENCRYPTED + Constants.COMMAND_SPLITTER + VERSCHLÜSSELT_NEW_USER_SENDING.getEncryptedSeed()
-				+ Constants.COMMAND_SPLITTER + VERSCHLÜSSELT_NEW_USER_SENDING.getEncryptedMessage())).thenReturn(NEW_USER_THING_WHICH_COME_FROM_SERVER);
-		when(secureMock.decrypt(VERSCHLÜSSELT_NEW_USER_SENDING.getSeed(), NEW_USER_THING_WHICH_COME_FROM_SERVER))
+		when(secureMock.encrypt(any(), any())).thenReturn(VERSCHLÃ¼SSELT_NEW_USER_SENDING);
+		when(kommMock.sendMessage(Constants.ENCRYPTED + Constants.COMMAND_SPLITTER + VERSCHLÃ¼SSELT_NEW_USER_SENDING.getEncryptedSeed()
+				+ Constants.COMMAND_SPLITTER + VERSCHLÃ¼SSELT_NEW_USER_SENDING.getEncryptedMessage())).thenReturn(NEW_USER_THING_WHICH_COME_FROM_SERVER);
+		when(secureMock.decrypt(VERSCHLÃ¼SSELT_NEW_USER_SENDING.getSeed(), NEW_USER_THING_WHICH_COME_FROM_SERVER))
 				.thenReturn(NEW_USER_PW + Constants.COMMAND_SPLITTER + NEW_USER_PRIKEY_ENC);
 		
 		Schnittstelle.setKommunikation(kommMock);
@@ -123,10 +123,10 @@ class BenutzerMockTest {
 		when(kommMock.sendMessage(Constants.USER_EXISTS + NEW_USERNAME)).thenReturn(Constants.TRUE);
 		
 		when(kommMock.sendMessage(Constants.GET_PUBLIC_KEY_FROM_SERVER)).thenReturn(SERVER_PUP_KEY);
-		when(secureMock.encrypt(any(), any())).thenReturn(VERSCHLÜSSELT_NEW_USER_SENDING);
-		when(kommMock.sendMessage(Constants.ENCRYPTED + Constants.COMMAND_SPLITTER + VERSCHLÜSSELT_NEW_USER_SENDING.getEncryptedSeed()
-				+ Constants.COMMAND_SPLITTER + VERSCHLÜSSELT_NEW_USER_SENDING.getEncryptedMessage())).thenReturn(NEW_USER_THING_WHICH_COME_FROM_SERVER);
-		when(secureMock.decrypt(VERSCHLÜSSELT_NEW_USER_SENDING.getSeed(), NEW_USER_THING_WHICH_COME_FROM_SERVER))
+		when(secureMock.encrypt(any(), any())).thenReturn(VERSCHLÃ¼SSELT_NEW_USER_SENDING);
+		when(kommMock.sendMessage(Constants.ENCRYPTED + Constants.COMMAND_SPLITTER + VERSCHLÃ¼SSELT_NEW_USER_SENDING.getEncryptedSeed()
+				+ Constants.COMMAND_SPLITTER + VERSCHLÃ¼SSELT_NEW_USER_SENDING.getEncryptedMessage())).thenReturn(NEW_USER_THING_WHICH_COME_FROM_SERVER);
+		when(secureMock.decrypt(VERSCHLÃ¼SSELT_NEW_USER_SENDING.getSeed(), NEW_USER_THING_WHICH_COME_FROM_SERVER))
 				.thenReturn(NEW_USER_PW + Constants.COMMAND_SPLITTER + NEW_USER_PRIKEY_ENC);
 		
 		Schnittstelle.setKommunikation(kommMock);

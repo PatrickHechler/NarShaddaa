@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.internal.matchers.StartsWith;
 
 import de.tafelwischenSecure.komm.KommunikationInterface;
-import de.tafelwischenSecure.rsa.schlüssel.AssymetrischPaar;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.AssymetrischPaar;
 import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
-import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
+import de.tafelwischenSecure.secure.VerschlÃ¼sselteServerNachricht;
 
 class SchnittstelleTest {
 	
@@ -42,7 +42,7 @@ class SchnittstelleTest {
 	}
 	
 	@Test
-	void testVerschlüsseltSendenErgebnis() throws Exception {
+	void testVerschlÃ¼sseltSendenErgebnis() throws Exception {
 		AssymetrischPaar serverKeys = new AssymetrischPaar();
 		String empfangen;
 		
@@ -55,10 +55,10 @@ class SchnittstelleTest {
 		when(kommMock.sendMessage(Constants.GET_PUBLIC_KEY_FROM_SERVER)).thenReturn(serverKeys.getOffenAlsString());
 		when(kommMock.sendMessage(argThat(new StartsWith(Constants.ENCRYPTED)))).thenReturn("");
 		
-		when(secureMock.encrypt(any(), any())).thenReturn(new VerschlüsselteServerNachricht(1234L, "FFFFFF", "FFFFFF"));
+		when(secureMock.encrypt(any(), any())).thenReturn(new VerschlÃ¼sselteServerNachricht(1234L, "FFFFFF", "FFFFFF"));
 		when(secureMock.decrypt(anyLong(), anyString())).thenReturn("ServerAnswer");
 		
-		empfangen = Schnittstelle.verschlüsseltSenden(Constants.IS_ALIVE);
+		empfangen = Schnittstelle.verschlÃ¼sseltSenden(Constants.IS_ALIVE);
 		assertEquals("ServerAnswer", empfangen);
 		
 		verify(kommMock).sendMessage(Constants.GET_PUBLIC_KEY_FROM_SERVER);
@@ -79,20 +79,20 @@ class SchnittstelleTest {
 	
 	@Test
 	@Disabled
-	void testVersclüsseltSenden() {
+	void testVersclÃ¼sseltSenden() {
 		fail("Not yet implemented");
 	}
 	
 	@Test
 	@Disabled
-	void testVerschlüsseltEmpfangen() {
+	void testVerschlÃ¼sseltEmpfangen() {
 		fail("Not yet implemented");
 	}
 	
 	@Test
 	void testRulesIsAcceptableName() {
 		assertTrue(Rules.isAcceptableName("ahgogen_qeghag"));
-		assertFalse(Rules.isAcceptableName("sagß"));
+		assertFalse(Rules.isAcceptableName("sagÃ¼"));
 		assertFalse(Rules.isAcceptableName("Hallo du da"));
 		assertFalse(Rules.isAcceptableName(""));
 		assertTrue(Rules.isAcceptableName("Ich_Bin_13_Jahre_ALT"));

@@ -10,14 +10,14 @@ public class Rules {
 	
 	/**
 	 * <pre>
-	 * Ein Name (Benutzername/Gruppenname) darf nur aus Buchstaben(groß und klein), Zahlen und '_' bestehen.
+	 * Ein Name (Benutzername/Gruppenname) darf nur aus Buchstaben(groÃ¼ und klein), Zahlen und '_' bestehen.
 	 * Ein Name darf nicht aus Kommandos bestehen.
 	 * </pre>
 	 * 
 	 * @param potentialacceptableName
-	 *            Dieser String wird überprüft. Wenn er nur aus Buchstaben/Zahlen und '_' besteht wird true zurückgegeben.
+	 *            Dieser String wird Ã¼berprÃ¼ft. Wenn er nur aus Buchstaben/Zahlen und '_' besteht wird true zurÃ¼ckgegeben.
 	 * 			
-	 * @return true, wenn der Übergabewert sich an diese Regeln hält, ansonsten false.
+	 * @return true, wenn der Ã¼bergabewert sich an diese Regeln hÃ¼lt, ansonsten false.
 	 */
 	public static boolean isAcceptableName(String potentialacceptableName) {
 		if (potentialacceptableName == null) {
@@ -49,11 +49,11 @@ public class Rules {
 			}
 		}
 		
-		for (char prüfen : potentialacceptableName.toCharArray()) {
-			if (prüfen <= '9' && prüfen >= '0') {
-			} else if (prüfen <= 'Z' && prüfen >= 'A') {
-			} else if (prüfen <= 'z' && prüfen >= 'a') {
-			} else if (prüfen == '_') {
+		for (char prÃ¼fen : potentialacceptableName.toCharArray()) {
+			if (prÃ¼fen <= '9' && prÃ¼fen >= '0') {
+			} else if (prÃ¼fen <= 'Z' && prÃ¼fen >= 'A') {
+			} else if (prÃ¼fen <= 'z' && prÃ¼fen >= 'a') {
+			} else if (prÃ¼fen == '_') {
 			} else {
 				return false;
 			}
@@ -69,15 +69,15 @@ public class Rules {
 	
 	public static String generatePwHash(long passwort) {
 		long origPasswort = passwort;
-		String rückgabe = "";
+		String rÃ¼ckgabe = "";
 		int runde;
 		for (runde = 0; runde < 8; runde ++ ) {
 			String hex = ZahlenUmwandeln.zuHex((byte) (passwort & 0xFF));
-			rückgabe += ZahlenUmwandeln.zuHex((byte) hex.hashCode());
+			rÃ¼ckgabe += ZahlenUmwandeln.zuHex((byte) hex.hashCode());
 			passwort = passwort >> 8;
 		}
-		rückgabe = ZahlenUmwandeln.zuHex(Long.reverse(origPasswort) ^ (Long.reverseBytes(origPasswort) ^ origPasswort) ^ ZahlenUmwandeln.hexZuLong(rückgabe));
-		return rückgabe;
+		rÃ¼ckgabe = ZahlenUmwandeln.zuHex(Long.reverse(origPasswort) ^ (Long.reverseBytes(origPasswort) ^ origPasswort) ^ ZahlenUmwandeln.hexZuLong(rÃ¼ckgabe));
+		return rÃ¼ckgabe;
 	}
 	
 	public static boolean isAcceptablePwhash(String potentialAcceptablePasswortHash) {

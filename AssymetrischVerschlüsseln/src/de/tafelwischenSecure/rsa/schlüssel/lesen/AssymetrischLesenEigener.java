@@ -1,15 +1,15 @@
-package de.tafelwischenSecure.rsa.schlüssel.lesen;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel.lesen;
 
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.lesen.LesenInterface;
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
+import de.hechler.patrick.hilfZeugs.byteweiseÃ¼bertragen.Standard.lesen.LesenInterface;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
 
 public class AssymetrischLesenEigener implements AssymetrischLesenEigenerInterface {
 	
-	private AssymetrischEigener schlüssel;
+	private AssymetrischEigener schlÃ¼ssel;
 	private LesenInterface leser;
 	
-	public AssymetrischLesenEigener(AssymetrischEigener schlüssel, LesenInterface leser) {
-		this.schlüssel = schlüssel;
+	public AssymetrischLesenEigener(AssymetrischEigener schlÃ¼ssel, LesenInterface leser) {
+		this.schlÃ¼ssel = schlÃ¼ssel;
 		this.leser = leser;
 	}
 	
@@ -19,22 +19,22 @@ public class AssymetrischLesenEigener implements AssymetrischLesenEigenerInterfa
 	}
 	
 	@Override
-	public Integer getNächstesByte() throws Exception {
-		Integer zwischen = leser.getNächstesByte();
+	public Integer getNÃ¼chstesByte() throws Exception {
+		Integer zwischen = leser.getNÃ¼chstesByte();
 		if (zwischen == null) {
 			return zwischen;
 		}
-		return schlüssel.entschlüsseln(zwischen);
+		return schlÃ¼ssel.entschlÃ¼sseln(zwischen);
 	}
 	
 	@Override
-	public AssymetrischEigener getSchlüssel() {
-		return schlüssel;
+	public AssymetrischEigener getSchlÃ¼ssel() {
+		return schlÃ¼ssel;
 	}
 	
 	@Override
-	public String getSchlüsselAlsString() {
-		return schlüssel.toString();
+	public String getSchlÃ¼sselAlsString() {
+		return schlÃ¼ssel.toString();
 	}
 	
 	@Override
@@ -45,17 +45,17 @@ public class AssymetrischLesenEigener implements AssymetrischLesenEigenerInterfa
 	@Override
 	public byte[] getBytes() throws Exception {
 		byte[] bytes = leser.getBytes();
-		return schlüssel.entschlüsseln(bytes);
+		return schlÃ¼ssel.entschlÃ¼sseln(bytes);
 	}
 	
 	@Override
 	public byte[] getBytes(int maxBytes) throws Exception {
 		byte[] bytes = leser.getBytes(maxBytes);
-		return schlüssel.entschlüsseln(bytes);
+		return schlÃ¼ssel.entschlÃ¼sseln(bytes);
 	}
 	
 	public String getName() {
-		return schlüssel.getName();
+		return schlÃ¼ssel.getName();
 	}
 	
 }

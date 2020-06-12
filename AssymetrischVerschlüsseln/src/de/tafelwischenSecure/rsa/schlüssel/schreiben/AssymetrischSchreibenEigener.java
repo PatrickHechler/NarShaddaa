@@ -1,21 +1,21 @@
-package de.tafelwischenSecure.rsa.schlüssel.schreiben;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel.schreiben;
 
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.schreiben.SchreibenInterface;
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
+import de.hechler.patrick.hilfZeugs.byteweiseÃ¼bertragen.Standard.schreiben.SchreibenInterface;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
 
 public class AssymetrischSchreibenEigener implements AssymetrischSchreibenEigenerInterface {
 	
 	SchreibenInterface schreiber;
-	AssymetrischEigener schlüssel;
+	AssymetrischEigener schlÃ¼ssel;
 	
 	@Override
-	public long getGröße() {
-		return schreiber.getGröße();
+	public long getGrÃ¼ÃŸe() {
+		return schreiber.getGrÃ¼ÃŸe();
 	}
 
 	@Override
 	public void schreibeByte(int schreibeByte) throws Exception {
-//		schreibeByte = schlüssel.entschlüsseln(schreibeByte);
+//		schreibeByte = schlÃ¼ssel.entschlÃ¼sseln(schreibeByte);
 //		schreiber.schreibeByte(schreibeByte);
 	}
 
@@ -25,13 +25,13 @@ public class AssymetrischSchreibenEigener implements AssymetrischSchreibenEigene
 	}
 
 	@Override
-	public AssymetrischEigener getSchlüssel() {
-		return schlüssel;
+	public AssymetrischEigener getSchlÃ¼ssel() {
+		return schlÃ¼ssel;
 	}
 
 	@Override
-	public String getSchlüsselAlsString() {
-		return schlüssel.toString();
+	public String getSchlÃ¼sselAlsString() {
+		return schlÃ¼ssel.toString();
 	}
 	
 }

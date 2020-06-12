@@ -13,6 +13,7 @@ public class CompatibilityUtils {
 		int filled = 0;
 		int cnt = input.read(result);
 		while (cnt != -1) {
+			filled += cnt;
 			if (filled == maxBytes) {
 				break;
 			}

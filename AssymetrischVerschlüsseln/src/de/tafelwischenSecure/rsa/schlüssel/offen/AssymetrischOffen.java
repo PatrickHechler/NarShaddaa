@@ -1,4 +1,4 @@
-package de.tafelwischenSecure.rsa.schlüssel.offen;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel.offen;
 
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
@@ -16,23 +16,23 @@ import de.hechler.patrick.hilfZeugs.umwandeln.ZahlenUmwandeln;
 
 public class AssymetrischOffen implements AssymetrischOffenInterface {
 	
-	private PublicKey schlüssel;
+	private PublicKey schlÃ¼ssel;
 	private Cipher cipher;
 	private String name;
 	
-	public AssymetrischOffen(PublicKey schlüssel) {
-		this.schlüssel = schlüssel;
+	public AssymetrischOffen(PublicKey schlÃ¼ssel) {
+		this.schlÃ¼ssel = schlÃ¼ssel;
 		name = "?";
 		ciperInit();
 	}
 	
-	public AssymetrischOffen(String schlüsselAlsString) {
-		String[] schlüsselString = schlüsselAlsString.split("=");
-		String stringKey = schlüsselString[0];
+	public AssymetrischOffen(String schlÃ¼sselAlsString) {
+		String[] schlÃ¼sselString = schlÃ¼sselAlsString.split("=");
+		String stringKey = schlÃ¼sselString[0];
 		byte[] bytes = ZahlenUmwandeln.hexZuByteArray(stringKey);
 		
-		if (schlüsselString.length > 1) {
-			name = schlüsselString[1];
+		if (schlÃ¼sselString.length > 1) {
+			name = schlÃ¼sselString[1];
 		} else {
 			name = "?";
 		}
@@ -42,7 +42,7 @@ public class AssymetrischOffen implements AssymetrischOffenInterface {
 		try {
 			kf = KeyFactory.getInstance("RSA");
 			
-			schlüssel = kf.generatePublic(X509publicKey);
+			schlÃ¼ssel = kf.generatePublic(X509publicKey);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			throw new RuntimeException(e);
 		}
@@ -52,40 +52,40 @@ public class AssymetrischOffen implements AssymetrischOffenInterface {
 	
 	private void ciperInit() {
 		try {
-			cipher = Cipher.getInstance("RSA");
-			cipher.init(Cipher.ENCRYPT_MODE, schlüssel);
+			cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+			cipher.init(Cipher.ENCRYPT_MODE, schlÃ¼ssel);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	@Override
-	public byte[] verschlüsseln(int verschlüsseln) {
-		return verschlüsseln(ZahlenUmwandeln.zuByteArr(verschlüsseln));
+	public byte[] verschlÃ¼sseln(int verschlÃ¼sseln) {
+		return verschlÃ¼sseln(ZahlenUmwandeln.zuByteArr(verschlÃ¼sseln));
 	}
 	
 	@Override
-	public byte[] verschlüsseln(byte[] verschlüsseln) {
+	public byte[] verschlÃ¼sseln(byte[] verschlÃ¼sseln) {
 		try {
-			return cipher.doFinal(verschlüsseln);
+			return cipher.doFinal(verschlÃ¼sseln);
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	@Override
-	public byte[] verschlüsseln(long verschlüsseln) {
-		return verschlüsseln(ZahlenUmwandeln.zuByteArr(verschlüsseln));
+	public byte[] verschlÃ¼sseln(long verschlÃ¼sseln) {
+		return verschlÃ¼sseln(ZahlenUmwandeln.zuByteArr(verschlÃ¼sseln));
 	}
 	
 	@Override
-	public byte[] verschlüsseln(String verschlüsseln) {
-		return verschlüsseln(verschlüsseln.getBytes());
+	public byte[] verschlÃ¼sseln(String verschlÃ¼sseln) {
+		return verschlÃ¼sseln(verschlÃ¼sseln.getBytes());
 	}
 	
 	@Override
 	public String toString() {
-		return ZahlenUmwandeln.zuHex(schlüssel.getEncoded()) + "=" + name;
+		return ZahlenUmwandeln.zuHex(schlÃ¼ssel.getEncoded()) + "=" + name;
 	}
 	
 	@Override
@@ -121,11 +121,11 @@ public class AssymetrischOffen implements AssymetrischOffenInterface {
 			}
 		}
 		
-		if (schlüssel == null ^ eigener.schlüssel == null) {
+		if (schlÃ¼ssel == null ^ eigener.schlÃ¼ssel == null) {
 			return false;
 		}
-		if (schlüssel != null) {
-			if ( !schlüssel.equals(eigener.schlüssel)) {
+		if (schlÃ¼ssel != null) {
+			if ( !schlÃ¼ssel.equals(eigener.schlÃ¼ssel)) {
 				return false;
 			}
 		}

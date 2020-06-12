@@ -4,37 +4,37 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class AssymetrischVerschlüsselnTest2 {
+class AssymetrischVerschlÃ¼sselnTest2 {
 	
 	@Test
 	void testByteToHex() {
 		int zahl;
-		String lösung;
+		String lÃ¼sung;
 		
 		zahl = 0;
-		lösung = "00";
+		lÃ¼sung = "00";
 		System.out.println((byte) zahl);
-		assertEquals(lösung, AssymetrischVerschlüsseln.byteToHex((byte) zahl));
+		assertEquals(lÃ¼sung, AssymetrischVerschlÃ¼sseln.byteToHex((byte) zahl));
 		
 		zahl = 255;
-		lösung = "FF";
+		lÃ¼sung = "FF";
 		System.out.println((byte) zahl);
-		assertEquals(lösung, AssymetrischVerschlüsseln.byteToHex((byte) zahl));
+		assertEquals(lÃ¼sung, AssymetrischVerschlÃ¼sseln.byteToHex((byte) zahl));
 		
 		zahl = 16;
-		lösung = "10";
+		lÃ¼sung = "10";
 		System.out.println((byte) zahl);
-		assertEquals(lösung, AssymetrischVerschlüsseln.byteToHex((byte) zahl));
+		assertEquals(lÃ¼sung, AssymetrischVerschlÃ¼sseln.byteToHex((byte) zahl));
 		
 		zahl = 15;
-		lösung = "0F";
+		lÃ¼sung = "0F";
 		System.out.println((byte) zahl);
-		assertEquals(lösung, AssymetrischVerschlüsseln.byteToHex((byte) zahl));
+		assertEquals(lÃ¼sung, AssymetrischVerschlÃ¼sseln.byteToHex((byte) zahl));
 		
 		zahl = 167;
-		lösung = "A7";
+		lÃ¼sung = "A7";
 		System.out.println((byte) zahl);
-		assertEquals(lösung, AssymetrischVerschlüsseln.byteToHex((byte) zahl));
+		assertEquals(lÃ¼sung, AssymetrischVerschlÃ¼sseln.byteToHex((byte) zahl));
 		
 	}
 	
@@ -43,32 +43,32 @@ class AssymetrischVerschlüsselnTest2 {
 		int runde;
 		
 		for (runde = 0; runde < 10; runde ++ ) {
-			assertEquals(runde + "", AssymetrischVerschlüsseln.kleineZahlZuHex(runde));
+			assertEquals(runde + "", AssymetrischVerschlÃ¼sseln.kleineZahlZuHex(runde));
 		}
-		assertEquals("A", AssymetrischVerschlüsseln.kleineZahlZuHex(10));
-		assertEquals("B", AssymetrischVerschlüsseln.kleineZahlZuHex(11));
-		assertEquals("C", AssymetrischVerschlüsseln.kleineZahlZuHex(12));
-		assertEquals("D", AssymetrischVerschlüsseln.kleineZahlZuHex(13));
-		assertEquals("E", AssymetrischVerschlüsseln.kleineZahlZuHex(14));
-		assertEquals("F", AssymetrischVerschlüsseln.kleineZahlZuHex(15));
+		assertEquals("A", AssymetrischVerschlÃ¼sseln.kleineZahlZuHex(10));
+		assertEquals("B", AssymetrischVerschlÃ¼sseln.kleineZahlZuHex(11));
+		assertEquals("C", AssymetrischVerschlÃ¼sseln.kleineZahlZuHex(12));
+		assertEquals("D", AssymetrischVerschlÃ¼sseln.kleineZahlZuHex(13));
+		assertEquals("E", AssymetrischVerschlÃ¼sseln.kleineZahlZuHex(14));
+		assertEquals("F", AssymetrischVerschlÃ¼sseln.kleineZahlZuHex(15));
 		
 		try {
-			AssymetrischVerschlüsseln.kleineZahlZuHex( -1);
+			AssymetrischVerschlÃ¼sseln.kleineZahlZuHex( -1);
 			fail("Kleine Zahl darf -1 nicht annehmen");
 		} catch (RuntimeException ignore) {
 		}
 		try {
-			AssymetrischVerschlüsseln.kleineZahlZuHex( -5);
+			AssymetrischVerschlÃ¼sseln.kleineZahlZuHex( -5);
 			fail("Kleine Zahl darf -5 nicht annehmen");
 		} catch (RuntimeException ignore) {
 		}
 		try {
-			AssymetrischVerschlüsseln.kleineZahlZuHex(16);
+			AssymetrischVerschlÃ¼sseln.kleineZahlZuHex(16);
 			fail("Kleine Zahl darf 16 nicht annehmen");
 		} catch (RuntimeException ignore) {
 		}
 		try {
-			AssymetrischVerschlüsseln.kleineZahlZuHex(5378);
+			AssymetrischVerschlÃ¼sseln.kleineZahlZuHex(5378);
 			fail("Kleine Zahl darf so hohe nicht annehmen");
 		} catch (RuntimeException ignore) {
 		}

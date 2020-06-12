@@ -1,4 +1,4 @@
-package de.tafelwischenSecure.rsa.schlüssel;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -8,8 +8,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 
 public class AssymetrischPaar implements AssymetrischPaarInterface {
 	
@@ -21,8 +21,8 @@ public class AssymetrischPaar implements AssymetrischPaarInterface {
 		generiereVomPaar(paar);
 	}
 	
-	public AssymetrischPaar(int schlüsselstärke) {
-		KeyPair paar = generiereNeuesPaar(schlüsselstärke);
+	public AssymetrischPaar(int schlÃ¼sselstÃ¼rke) {
+		KeyPair paar = generiereNeuesPaar(schlÃ¼sselstÃ¼rke);
 		generiereVomPaar(paar);
 	}
 	
@@ -31,27 +31,27 @@ public class AssymetrischPaar implements AssymetrischPaarInterface {
 		offen = new AssymetrischOffen(paar.getPublic());
 	}
 	
-	private KeyPair generiereNeuesPaar(int schlüsselstärke) {
+	private KeyPair generiereNeuesPaar(int schlÃ¼sselstÃ¼rke) {
 		KeyPairGenerator rsaKPG;
 		try {
 			rsaKPG = KeyPairGenerator.getInstance("RSA");
-			rsaKPG.initialize(schlüsselstärke);
+			rsaKPG.initialize(schlÃ¼sselstÃ¼rke);
 			
-			KeyPair rückgabe = rsaKPG.generateKeyPair();
-			return rückgabe;
+			KeyPair rÃ¼ckgabe = rsaKPG.generateKeyPair();
+			return rÃ¼ckgabe;
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
-	public AssymetrischPaar(PrivateKey privaterSchlüssel, PublicKey öffentlicherSchlüssel) {
-		eigener = new AssymetrischEigener(privaterSchlüssel);
-		offen = new AssymetrischOffen(öffentlicherSchlüssel);
+	public AssymetrischPaar(PrivateKey privaterSchlÃ¼ssel, PublicKey Ã¼ffentlicherSchlÃ¼ssel) {
+		eigener = new AssymetrischEigener(privaterSchlÃ¼ssel);
+		offen = new AssymetrischOffen(Ã¼ffentlicherSchlÃ¼ssel);
 	}
 	
-	public AssymetrischPaar(KeyPair schlüsselPaar) {
-		eigener = new AssymetrischEigener(schlüsselPaar.getPrivate());
-		offen = new AssymetrischOffen(schlüsselPaar.getPublic());
+	public AssymetrischPaar(KeyPair schlÃ¼sselPaar) {
+		eigener = new AssymetrischEigener(schlÃ¼sselPaar.getPrivate());
+		offen = new AssymetrischOffen(schlÃ¼sselPaar.getPublic());
 	}
 	
 	public AssymetrischPaar(String paarAlsString) {
@@ -61,53 +61,53 @@ public class AssymetrischPaar implements AssymetrischPaarInterface {
 	}
 	
 	@Override
-	public long entschlüsselnLong(byte[] entschlüsseln) {
-		return eigener.entschlüsselnLong(entschlüsseln);
+	public long entschlÃ¼sselnLong(byte[] entschlÃ¼sseln) {
+		return eigener.entschlÃ¼sselnLong(entschlÃ¼sseln);
 	}
 	
 	@Override
-	public byte[] entschlüsseln(byte[] entschlüsseln) {
-		return eigener.entschlüsseln(entschlüsseln);
+	public byte[] entschlÃ¼sseln(byte[] entschlÃ¼sseln) {
+		return eigener.entschlÃ¼sseln(entschlÃ¼sseln);
 	}
 	
 	@Override
-	public byte[] entschlüsseln(String entschlüsseln) {
-		return eigener.entschlüsseln(entschlüsseln);
+	public byte[] entschlÃ¼sseln(String entschlÃ¼sseln) {
+		return eigener.entschlÃ¼sseln(entschlÃ¼sseln);
 	}
 	
 	@Override
-	public byte[] entschlüsseln(String entschlüsseln, String charset) throws UnsupportedEncodingException {
-		return eigener.entschlüsseln(entschlüsseln, charset);
+	public byte[] entschlÃ¼sseln(String entschlÃ¼sseln, String charset) throws UnsupportedEncodingException {
+		return eigener.entschlÃ¼sseln(entschlÃ¼sseln, charset);
 	}
 	
 	@Override
-	public byte[] entschlüsseln(String entschlüsseln, Charset charset) {
-		return eigener.entschlüsseln(entschlüsseln, charset);
+	public byte[] entschlÃ¼sseln(String entschlÃ¼sseln, Charset charset) {
+		return eigener.entschlÃ¼sseln(entschlÃ¼sseln, charset);
 	}
 	
 	@Override
-	public int entschlüsselnInt(byte[] entschlüsseln) {
-		return eigener.entschlüsselnInt(entschlüsseln);
+	public int entschlÃ¼sselnInt(byte[] entschlÃ¼sseln) {
+		return eigener.entschlÃ¼sselnInt(entschlÃ¼sseln);
 	}
 	
 	@Override
-	public byte[] verschlüsseln(int verschlüsseln) {
-		return offen.verschlüsseln(verschlüsseln);
+	public byte[] verschlÃ¼sseln(int verschlÃ¼sseln) {
+		return offen.verschlÃ¼sseln(verschlÃ¼sseln);
 	}
 	
 	@Override
-	public byte[] verschlüsseln(byte[] verschlüsseln) {
-		return offen.verschlüsseln(verschlüsseln);
+	public byte[] verschlÃ¼sseln(byte[] verschlÃ¼sseln) {
+		return offen.verschlÃ¼sseln(verschlÃ¼sseln);
 	}
 	
 	@Override
-	public byte[] verschlüsseln(long verschlüsseln) {
-		return offen.verschlüsseln(verschlüsseln);
+	public byte[] verschlÃ¼sseln(long verschlÃ¼sseln) {
+		return offen.verschlÃ¼sseln(verschlÃ¼sseln);
 	}
 	
 	@Override
-	public byte[] verschlüsseln(String verschlüsseln) {
-		return offen.verschlüsseln(verschlüsseln);
+	public byte[] verschlÃ¼sseln(String verschlÃ¼sseln) {
+		return offen.verschlÃ¼sseln(verschlÃ¼sseln);
 	}
 	
 	@Override

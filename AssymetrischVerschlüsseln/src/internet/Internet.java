@@ -20,7 +20,7 @@ public class Internet {
 	
 	private static void rsa() {
 		try {
-			// Schritt 1: Einen KeyPairGenerator für eine bestimmte Art der Verschlüsselung generieren.
+			// Schritt 1: Einen KeyPairGenerator fÃ¼r eine bestimmte Art der VerschlÃ¼sselung generieren.
 			// caseINsensitiv
 			KeyPairGenerator rsaKPG = KeyPairGenerator.getInstance("RSA"); // NoSuchAlgorithmException
 			// Infos
@@ -33,10 +33,10 @@ public class Internet {
 			// Schritt 2: Den KeyPairGenerator initialisieren mit der Methode initialize()
 			// es gibt 4 initialize()-Methoden, hier wird die einfachste verwendet
 			// Methode kann entfallen, dann wird als Standardwert 1024 genommen
-			rsaKPG.initialize(4096); // Bitlänge des Modules
+			rsaKPG.initialize(4096); // BitlÃ¼nge des Modules
 			// java.security.InvalidParameterException: RSA keys must be at least 512 bits long
-			// Die Größe des Modules bestimmt die Länge des zu verschlüsselnden Textes
-			// Mit einer Bitlänge von 800 etwa kann man nur Texte bis 102 byte Länge verschlüsseln
+			// Die GrÃ¼ÃŸe des Modules bestimmt die LÃ¼nge des zu verschlÃ¼sselnden Textes
+			// Mit einer BitlÃ¼nge von 800 etwa kann man nur Texte bis 102 byte LÃ¼nge verschlÃ¼sseln
 			
 			// Schritt 3a: KeyPair erzeugen
 			KeyPair kp = rsaKPG.generateKeyPair();
@@ -58,14 +58,14 @@ public class Internet {
 			System.out.println("Format:    " + privateKey.getFormat()); // PKCS#8
 			System.out.println();
 			
-			// Schritt 4: Cipherinstanz zum gewählten Verschlüsselungsalgorithmus erzeugen
-			Cipher cipher = Cipher.getInstance("RSA"); // NoSuchPaddingException
+			// Schritt 4: Cipherinstanz zum gewÃ¼hlten VerschlÃ¼sselungsalgorithmus erzeugen
+			Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding"); // NoSuchPaddingException
 			
-			// Schritt 5: Verschlüsselungsmodus einschalten und das in Schritt 3 erzeugte PublicKey-Objekt übergeben
+			// Schritt 5: VerschlÃ¼sselungsmodus einschalten und das in Schritt 3 erzeugte PublicKey-Objekt Ã¼bergeben
 			cipher.init(Cipher.ENCRYPT_MODE, publicKey); // InvalidKeyException
-			// wenn man init wegläßt, dann IllegalStateException: Cipher not initialized
+			// wenn man init weglÃ¼Ã¼t, dann IllegalStateException: Cipher not initialized
 			
-			// Schritt 6: Daten in ein Bytearray verwandeln und mit der Methode doFinal verschlüsseln
+			// Schritt 6: Daten in ein Bytearray verwandeln und mit der Methode doFinal verschlÃ¼sseln
 			String klarText = "-2898261312640379801";
 			System.out.println("Text to encrypt:           " + klarText);
 			byte[] arrayToEncrypt = klarText.getBytes();
@@ -73,14 +73,14 @@ public class Internet {
 			byte[] encryptedArray = cipher.doFinal(klarText.getBytes()); // IllegalBlockSizeException, BadPaddingException
 			System.out.println("Encrypted Array length:    " + encryptedArray.length);
 			
-			// verschlüsselten String ausgeben
+			// verschlÃ¼sselten String ausgeben
 			String encryptedString = new String(encryptedArray); //
 			System.out.println("Encrypted Bytes as String: " + encryptedString);
 			System.out.println();
 			
-			// Schritt 7: verschlüsseltes Bytearray senden...
+			// Schritt 7: verschlÃ¼sseltes Bytearray senden...
 			
-			// Schritt 8: Entschlüsseln
+			// Schritt 8: EntschlÃ¼sseln
 			cipher.init(Cipher.DECRYPT_MODE, privateKey); // InvalidKeyException
 			byte[] decryptedArray = cipher.doFinal(encryptedArray); // IllegalBlockSizeException, BadPaddingException
 			String decryptedString = new String(decryptedArray);

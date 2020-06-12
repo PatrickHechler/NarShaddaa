@@ -19,8 +19,8 @@ import de.tafelwischenSecure.exceptions.UserDoesNotExistsExeption;
 import de.tafelwischenSecure.exceptions.WrongPasswortException;
 import de.tafelwischenSecure.message.MessageInterface;
 import de.tafelwischenSecure.message.ShortMessageInterface;
-import de.tafelwischenSecure.rsa.schl¸ssel.eigener.AssymetrischEigener;
-import de.tafelwischenSecure.rsa.schl¸ssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.rsa.schl√ºssel.eigener.AssymetrischEigener;
+import de.tafelwischenSecure.rsa.schl√ºssel.offen.AssymetrischOffen;
 
 public class TafelwischenSecureClient {
 	
@@ -45,7 +45,7 @@ public class TafelwischenSecureClient {
 		}
 		System.out.println("Habe mich mit dem Server Version " + serverVersion + " verbunden.");
 		if (serverVersion != EXPECTED_SERVER_VERSION) {
-			System.out.println("Es wurde eine andere Sever-version erwartet, mˆglicherweise funktionieren einige sachen falsch.");
+			System.out.println("Es wurde eine andere Sever-version erwartet, m√ºglicherweise funktionieren einige sachen falsch.");
 		}
 		GlobalScanner ben = GlobalScanner.getInstance();
 		anmeldenOderRegistrieren();
@@ -66,14 +66,14 @@ public class TafelwischenSecureClient {
 					long id = Long.parseLong(eingabe);
 					getMsg(id);
 				} catch (NumberFormatException e) {
-					System.out.println("Daas ist keine g¸ltige Message-Id!");
+					System.out.println("Daas ist keine g√ºltige Message-Id!");
 				}
 				break;
 			case Constants.USR_LIST:
 				list();
 				break;
 			case Constants.USR_QUIT:
-				System.out.println("Tsch¸ss");
+				System.out.println("Tsch√ºss");
 				return;
 			case Constants.USR_SEND_MSG_LO:
 				sendMsg();
@@ -84,7 +84,7 @@ public class TafelwischenSecureClient {
 					long id = Long.parseLong(eingabe);
 					getEncMsg(id);
 				} catch (NumberFormatException e) {
-					System.out.println("Daas ist keine g¸ltige Message-Id!");
+					System.out.println("Daas ist keine g√ºltige Message-Id!");
 				}
 				break;
 			case Constants.USR_SEND_ENC_MSG_LO:
@@ -104,18 +104,18 @@ public class TafelwischenSecureClient {
 		try {
 			serverPort = (args.length > 1) ? Integer.parseInt(args[1]) : Constants.DEAFULT_PORT;
 		} catch (NumberFormatException e) {
-			System.err.println("Ung¸ltiger Port in den args");
+			System.err.println("Ung√ºltiger Port in den args");
 			System.exit(1);
 		}
 		Schnittstelle.configServer(serverName, serverPort);
 	}
 	
 	private static void sendEncMsg() {
-		String empf‰nger;
+		String empf√ºnger;
 		String titel;
 		String inhalt;
 		try {
-			empf‰nger = sendmsgEmpf‰ngerEingabe();
+			empf√ºnger = sendmsgEmpf√ºngerEingabe();
 		} catch (UserDoesNotExistsExeption e) {
 			System.out.println(e.getUsername() + " existiert nicht");
 			return;
@@ -126,10 +126,10 @@ public class TafelwischenSecureClient {
 		titel = sendMsgBetreffEingabe();
 		inhalt = sendMsgInhaltEingeben();
 		try {
-			AssymetrischOffen empf‰ngerKey = Benutzer.getOffenFromUser(empf‰nger);
-			boolean ok = Benutzer.sendEncrypted(username, Rules.generatePwHash(passwort), empf‰nger, titel, inhalt.toString(), empf‰ngerKey);
+			AssymetrischOffen empf√ºngerKey = Benutzer.getOffenFromUser(empf√ºnger);
+			boolean ok = Benutzer.sendEncrypted(username, Rules.generatePwHash(passwort), empf√ºnger, titel, inhalt.toString(), empf√ºngerKey);
 			if (ok) {
-				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empf‰nger + " geschickt.");
+				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empf√ºnger + " geschickt.");
 			} else {
 				System.out.println("Die Nachricht konnte nicht versendet wetrden  :-(");
 			}
@@ -157,11 +157,11 @@ public class TafelwischenSecureClient {
 	}
 	
 	private static void sendMsg() {
-		String empf‰nger;
+		String empf√ºnger;
 		String titel;
 		String inhalt;
 		try {
-			empf‰nger = sendmsgEmpf‰ngerEingabe();
+			empf√ºnger = sendmsgEmpf√ºngerEingabe();
 		} catch (UserDoesNotExistsExeption e) {
 			System.out.println(e.getUsername() + " existiert nicht");
 			return;
@@ -172,9 +172,9 @@ public class TafelwischenSecureClient {
 		titel = sendMsgBetreffEingabe();
 		inhalt = sendMsgInhaltEingeben();
 		try {
-			boolean ok = Benutzer.sendMessage(username, Rules.generatePwHash(passwort), empf‰nger, titel, inhalt.toString());
+			boolean ok = Benutzer.sendMessage(username, Rules.generatePwHash(passwort), empf√ºnger, titel, inhalt.toString());
 			if (ok) {
-				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empf‰nger + " geschickt.");
+				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empf√ºnger + " geschickt.");
 			} else {
 				System.out.println("Die Nachricht konnte nicht versendet wetrden  :-(");
 			}
@@ -209,19 +209,19 @@ public class TafelwischenSecureClient {
 		return inhalt.toString();
 	}
 	
-	private static String sendmsgEmpf‰ngerEingabe() throws UserDoesNotExistsExeption, IOException {
+	private static String sendmsgEmpf√ºngerEingabe() throws UserDoesNotExistsExeption, IOException {
 		GlobalScanner ben = GlobalScanner.getInstance();
-		String empf‰nger;
-		System.out.println("Gebe nun den Empf‰nger ein.");
-		empf‰nger = ben.next();
+		String empf√ºnger;
+		System.out.println("Gebe nun den Empf√ºnger ein.");
+		empf√ºnger = ben.next();
 		try {
-			if ( !Benutzer.exists(empf‰nger)) {
-				throw new UserDoesNotExistsExeption(empf‰nger);
+			if ( !Benutzer.exists(empf√ºnger)) {
+				throw new UserDoesNotExistsExeption(empf√ºnger);
 			}
 		} catch (IOException e) {
 			throw new IOException();
 		}
-		return empf‰nger;
+		return empf√ºnger;
 	}
 	
 	private static void getMsg(long id) {
@@ -298,9 +298,9 @@ public class TafelwischenSecureClient {
 		System.out.println("  " + Constants.USR_LIST + " um alle ungelesenen Nachrichten anzuzeigen.");
 		System.out.println("  " + Constants.USR_LIST_ALL + " um alle Nachrichten anzuzeigen.");
 		System.out.println("  " + Constants.USR_GET_MSG + " <msgID> um die Nachricht ID zu lesen.");
-		System.out.println("  " + Constants.USR_GET_ENC_MSG + " <msgID> um die verschl¸sselte Nachricht ID zu lesen");
+		System.out.println("  " + Constants.USR_GET_ENC_MSG + " <msgID> um die verschl√ºsselte Nachricht ID zu lesen");
 		System.out.println("  " + Constants.USR_SEND_MSG + " um eine Nachricht zu senden.");
-		System.out.println("  " + Constants.USR_SEND_ENC_MSG + " um eine Nachricht mit verschl¸sseltem Inhalt zu senden.");
+		System.out.println("  " + Constants.USR_SEND_ENC_MSG + " um eine Nachricht mit verschl√ºsseltem Inhalt zu senden.");
 		System.out.println("  " + Constants.USR_QUIT + " um das Programm zu beenden.");
 	}
 	
@@ -328,7 +328,7 @@ public class TafelwischenSecureClient {
 		String name = null;
 		long pw;
 		while (true) {
-			System.out.println("Wie heiﬂt du?");
+			System.out.println("Wie hei√ºt du?");
 			name = ben.next();
 			pw = passwortEingabe();
 			try {
@@ -338,7 +338,7 @@ public class TafelwischenSecureClient {
 				eigenerKey = user;
 				return;
 			} catch (InvalidUsernameExeption e) {
-				System.out.println(name + " ist kein g¸ltiger Benuttzername.");
+				System.out.println(name + " ist kein g√ºltiger Benuttzername.");
 			} catch (UserDoesNotExistsExeption e) {
 				System.out.println(name + " existiert nicht.");
 			} catch (WrongPasswortException e) {
@@ -356,7 +356,7 @@ public class TafelwischenSecureClient {
 	private static void erstellen() {
 		GlobalScanner ben = GlobalScanner.getInstance();
 		while (true) {
-			System.out.println("Wie mˆchtest du heiﬂen?");
+			System.out.println("Wie m√ºchtest du hei√üen?");
 			String name = ben.next();
 			try {
 				UserErgebnis user = Benutzer.erstellen(name);
@@ -367,7 +367,7 @@ public class TafelwischenSecureClient {
 			} catch (UserAlreadyExistsException e) {
 				System.out.println(name + " existiert bereits.");
 			} catch (InvalidUsernameExeption e) {
-				System.out.println(name + " ist kein g¸ltiger Benutzername, bitte suche dir einen anderen aus.");
+				System.out.println(name + " ist kein g√ºltiger Benutzername, bitte suche dir einen anderen aus.");
 			} catch (IOException e) {
 				System.out.println("Es git gerade probleme mit der Verbindung zum Server.");
 			}
@@ -380,7 +380,7 @@ public class TafelwischenSecureClient {
 			try {
 				return Long.parseLong(eingabe);
 			} catch (NumberFormatException fehler) {
-				System.out.println("Dies ist kein g¸ltiges Passwort.");
+				System.out.println("Dies ist kein g√ºltiges Passwort.");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException ignore) {

@@ -1,15 +1,15 @@
-package de.tafelwischenSecure.rsa.schlüssel.lesen;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel.lesen;
 
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.lesen.LesenInterface;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.hechler.patrick.hilfZeugs.byteweiseÃ¼bertragen.Standard.lesen.LesenInterface;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 
 public class AssymetrischLesenOffen implements AssymetrischLesenOffenerInterface {
 	
-	private AssymetrischOffen schlüssel;
+	private AssymetrischOffen schlÃ¼ssel;
 	private LesenInterface leser;
 	
-	public AssymetrischLesenOffen(AssymetrischOffen schlüssel, LesenInterface leser) {
-		this.schlüssel = schlüssel;
+	public AssymetrischLesenOffen(AssymetrischOffen schlÃ¼ssel, LesenInterface leser) {
+		this.schlÃ¼ssel = schlÃ¼ssel;
 		this.leser = leser;
 	}
 	
@@ -19,12 +19,12 @@ public class AssymetrischLesenOffen implements AssymetrischLesenOffenerInterface
 	}
 	
 	@Override
-	public Integer getNächstesByte() throws Exception {
-		Integer zwischen = leser.getNächstesByte();
+	public Integer getNÃ¼chstesByte() throws Exception {
+		Integer zwischen = leser.getNÃ¼chstesByte();
 		if (zwischen == null) {
 			return null;
 		}
-		return schlüssel.verschlüsseln(zwischen);
+		return schlÃ¼ssel.verschlÃ¼sseln(zwischen);
 	}
 	
 	@Override
@@ -33,30 +33,30 @@ public class AssymetrischLesenOffen implements AssymetrischLesenOffenerInterface
 	}
 	
 	@Override
-	public AssymetrischOffen getSchlüssel() {
-		return schlüssel;
+	public AssymetrischOffen getSchlÃ¼ssel() {
+		return schlÃ¼ssel;
 	}
 	
 	@Override
-	public String getSchlüsselAlsString() {
-		return schlüssel.toString();
+	public String getSchlÃ¼sselAlsString() {
+		return schlÃ¼ssel.toString();
 	}
 	
 	@Override
 	public byte[] getBytes() throws Exception {
 		byte[] bytes = leser.getBytes();
-		return schlüssel.verschlüsseln(bytes);
+		return schlÃ¼ssel.verschlÃ¼sseln(bytes);
 	}
 	
 	@Override
 	public byte[] getBytes(int maxBytes) throws Exception {
 		byte[] bytes = leser.getBytes(maxBytes);
-		return schlüssel.verschlüsseln(bytes);
+		return schlÃ¼ssel.verschlÃ¼sseln(bytes);
 	}
 	
 	@Override
 	public String getName() {
-		return schlüssel.getName();
+		return schlÃ¼ssel.getName();
 	}
 	
 }

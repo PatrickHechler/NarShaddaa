@@ -2,8 +2,8 @@ package de.tafelwischenSecure.komm;
 
 import java.io.IOException;
 
-import de.hechler.patrick.hilfZeugs.byteweise‹bertragen.Socket.SocketBiDirektional;
-import de.hechler.patrick.hilfZeugs.byteweise‹bertragen.Socket.SocketBiDirektionalInterface;
+import de.hechler.patrick.hilfZeugs.byteweise√úbertragen.Socket.SocketBiDirektional;
+import de.hechler.patrick.hilfZeugs.byteweise√úbertragen.Socket.SocketBiDirektionalInterface;
 
 public class Kommunikation implements KommunikationInterface {
 	
@@ -18,9 +18,9 @@ public class Kommunikation implements KommunikationInterface {
 	@Override
 	public String sendMessage(String message) throws IOException {
 		SocketBiDirektionalInterface socket = new SocketBiDirektional(serverName, serverPort);
-		String r¸ckgabe = socket.sendWithResponse(message);
+		String r√ºckgabe = socket.sendWithResponse(message);
 		socket.close();
-		return r¸ckgabe;
+		return r√ºckgabe;
 	}
 	
 }

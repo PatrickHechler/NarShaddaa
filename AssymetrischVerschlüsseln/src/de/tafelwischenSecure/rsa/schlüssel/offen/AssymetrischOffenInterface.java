@@ -1,14 +1,14 @@
-package de.tafelwischenSecure.rsa.schlüssel.offen;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel.offen;
 
 public interface AssymetrischOffenInterface {
 	
-	public byte[] verschlüsseln(long verschlüsseln);
+	public byte[] verschlÃ¼sseln(long verschlÃ¼sseln);
 	
-	public byte[] verschlüsseln(int verschlüsseln);
+	public byte[] verschlÃ¼sseln(int verschlÃ¼sseln);
 	
-	public byte[] verschlüsseln(byte[] verschlüsseln);
+	public byte[] verschlÃ¼sseln(byte[] verschlÃ¼sseln);
 	
-	public byte[] verschlüsseln(String verschlüsseln);
+	public byte[] verschlÃ¼sseln(String verschlÃ¼sseln);
 	
 	@Override
 	public String toString();

@@ -1,18 +1,18 @@
 package de.tafelwischenSecure.komm.sec;
 
-public class VerschlüsselteServerNachricht {
+public class VerschlÃ¼sselteServerNachricht {
 	
 	private long seed;
 	/**
-	 * Mit dem Server Public Key Verschlüsselter Seed
+	 * Mit dem Server Public Key VerschlÃ¼sselter Seed
 	 */
 	private String encryptedSeed;
 	/**
-	 * Mit dem seed Verschlüsselte Nachricht
+	 * Mit dem seed VerschlÃ¼sselte Nachricht
 	 */
 	private String encryptedMessage;
 	
-	public VerschlüsselteServerNachricht(long seed, String encryptedSeed, String encryptedMessage) {
+	public VerschlÃ¼sselteServerNachricht(long seed, String encryptedSeed, String encryptedMessage) {
 		this.seed = seed;
 		this.encryptedSeed = encryptedSeed;
 		this.encryptedMessage = encryptedMessage;

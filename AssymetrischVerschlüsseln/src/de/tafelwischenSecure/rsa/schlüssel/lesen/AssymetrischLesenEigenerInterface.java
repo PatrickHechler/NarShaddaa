@@ -1,13 +1,13 @@
-package de.tafelwischenSecure.rsa.schlüssel.lesen;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel.lesen;
 
-import de.hechler.patrick.hilfZeugs.byteweiseÜbertragen.Standard.lesen.LesenInterface;
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
+import de.hechler.patrick.hilfZeugs.byteweiseÃ¼bertragen.Standard.lesen.LesenInterface;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
 
 public interface AssymetrischLesenEigenerInterface extends LesenInterface {
 	
-	public AssymetrischEigener getSchlüssel();
+	public AssymetrischEigener getSchlÃ¼ssel();
 	
-	public String getSchlüsselAlsString();
+	public String getSchlÃ¼sselAlsString();
 	
 	public String getName();
 	

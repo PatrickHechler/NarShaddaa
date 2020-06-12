@@ -1,24 +1,24 @@
-package de.tafelwischenSecure.rsa.schlüssel.eigener;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 /**
- * Dieser Schlüssel kann die Dateien, welche mit dem offenem Schlüssel verschlüsselt wurden entschlüsseln.
+ * Dieser SchlÃ¼ssel kann die Dateien, welche mit dem offenem SchlÃ¼ssel verschlÃ¼sselt wurden entschlÃ¼sseln.
  */
 public interface AssymetrischEigenerInterface {
 	
-	public int entschlüsselnInt(byte[] entschlüsseln);
+	public int entschlÃ¼sselnInt(byte[] entschlÃ¼sseln);
 	
-	public long entschlüsselnLong(byte[] entschlüsseln);
+	public long entschlÃ¼sselnLong(byte[] entschlÃ¼sseln);
 	
-	public byte[] entschlüsseln(byte[] entschlüsseln);
+	public byte[] entschlÃ¼sseln(byte[] entschlÃ¼sseln);
 	
-	public byte[] entschlüsseln(String entschlüsseln);
+	public byte[] entschlÃ¼sseln(String entschlÃ¼sseln);
 	
-	public byte[] entschlüsseln(String entschlüsseln, String charset) throws UnsupportedEncodingException;
+	public byte[] entschlÃ¼sseln(String entschlÃ¼sseln, String charset) throws UnsupportedEncodingException;
 	
-	byte[] entschlüsseln(String entschlüsseln, Charset charset);
+	byte[] entschlÃ¼sseln(String entschlÃ¼sseln, Charset charset);
 	
 	public String getName();
 	

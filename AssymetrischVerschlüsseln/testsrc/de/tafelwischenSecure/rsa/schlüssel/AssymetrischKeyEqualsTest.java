@@ -1,4 +1,4 @@
-package de.tafelwischenSecure.rsa.schlüssel;
+package de.tafelwischenSecure.rsa.schlÃ¼ssel;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,8 +10,8 @@ import javax.crypto.NoSuchPaddingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
-import de.tafelwischenSecure.rsa.schlüssel.offen.AssymetrischOffen;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.offen.AssymetrischOffen;
 
 class AssymetrischKeyEqualsTest {
 	

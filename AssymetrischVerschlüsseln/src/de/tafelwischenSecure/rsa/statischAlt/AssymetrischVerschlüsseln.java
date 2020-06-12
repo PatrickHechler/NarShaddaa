@@ -17,57 +17,57 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-class AssymetrischVerschlüsseln {
+class AssymetrischVerschlÃ¼sseln {
 	
-	public static byte[] verschlüsseln(PublicKey publicKey, byte[] verschlüsseln)
+	public static byte[] verschlÃ¼sseln(PublicKey publicKey, byte[] verschlÃ¼sseln)
 			throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		
-		byte[] rückgabe;
+		byte[] rÃ¼ckgabe;
 		Cipher cipher;
 		
-		cipher = Cipher.getInstance("RSA");
+		cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-		rückgabe = cipher.doFinal(verschlüsseln);
+		rÃ¼ckgabe = cipher.doFinal(verschlÃ¼sseln);
 		
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
-	public static byte[] entschlüsseln(PrivateKey privateKey, byte[] entschlüseln)
+	public static byte[] entschlÃ¼sseln(PrivateKey privateKey, byte[] entschlÃ¼seln)
 			throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		Cipher cipher;
-		byte[] rückgabe;
+		byte[] rÃ¼ckgabe;
 		
-		cipher = Cipher.getInstance("RSA");
+		cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
-		rückgabe = cipher.doFinal(entschlüseln);
+		rÃ¼ckgabe = cipher.doFinal(entschlÃ¼seln);
 		
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
-	public static KeyPair generator(Integer schlüsselstärke) throws NoSuchAlgorithmException {
+	public static KeyPair generator(Integer schlÃ¼sselstÃ¼rke) throws NoSuchAlgorithmException {
 		
-		if (schlüsselstärke == null) {
-			schlüsselstärke = 4096;
+		if (schlÃ¼sselstÃ¼rke == null) {
+			schlÃ¼sselstÃ¼rke = 4096;
 		}
 		
 		KeyPairGenerator rsaKPG = KeyPairGenerator.getInstance("RSA");
-		rsaKPG.initialize(schlüsselstärke);
+		rsaKPG.initialize(schlÃ¼sselstÃ¼rke);
 		
-		KeyPair rückgabe = rsaKPG.generateKeyPair();
-		return rückgabe;
+		KeyPair rÃ¼ckgabe = rsaKPG.generateKeyPair();
+		return rÃ¼ckgabe;
 	}
 	
 	public static String toString(Key umwandeln) {
-		String rückgabe = "";
+		String rÃ¼ckgabe = "";
 		int runde;
 		
 		byte[] bytes = umwandeln.getEncoded();
 		
 		for (runde = 0; runde < bytes.length; runde ++ ) {
-			rückgabe += byteToHex(bytes[runde]);
+			rÃ¼ckgabe += byteToHex(bytes[runde]);
 		}
 		
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
 	public static PublicKey generatePublicKeyFromString(String generator) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -87,43 +87,43 @@ class AssymetrischVerschlüsseln {
 	}
 	
 	static String byteToHex(byte umwandeln) {
-		String rückgabe;
+		String rÃ¼ckgabe;
 		int zwischen;
 		int wandelZahl = umwandeln & 0xFF;
 		
 		zwischen = wandelZahl;
 		
 		zwischen = (zwischen >> 4) & 0xF;
-		rückgabe = kleineZahlZuHex(zwischen);
+		rÃ¼ckgabe = kleineZahlZuHex(zwischen);
 		
 		zwischen = (wandelZahl - (zwischen << 4));
 		zwischen = (zwischen & 0xF);
-		rückgabe += kleineZahlZuHex(zwischen);
+		rÃ¼ckgabe += kleineZahlZuHex(zwischen);
 		
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
 	static byte[] hexToByte(String hexZahl) {
 		int runde;
-		byte[] rückgabe;
+		byte[] rÃ¼ckgabe;
 		
 		if (hexZahl.length() % 2 != 0) {
 			hexZahl = "0" + hexZahl;
 		}
-		rückgabe = new byte[hexZahl.length() / 2];
+		rÃ¼ckgabe = new byte[hexZahl.length() / 2];
 		
-		for (runde = 0; runde < rückgabe.length; runde ++ ) {
-			rückgabe[runde] = kleinHexToByte(hexZahl.substring(runde * 2, runde * 2 + 2));
+		for (runde = 0; runde < rÃ¼ckgabe.length; runde ++ ) {
+			rÃ¼ckgabe[runde] = kleinHexToByte(hexZahl.substring(runde * 2, runde * 2 + 2));
 		}
 		
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
 	static byte kleinHexToByte(String kleinHex) {
-		byte rückgabe;
+		byte rÃ¼ckgabe;
 		
 		if (kleinHex.length() != 2) {
-			throw new RuntimeException("Die kleine HexZahl muss 2 lang sein: " + kleinHex + " ist ungültig!");
+			throw new RuntimeException("Die kleine HexZahl muss 2 lang sein: " + kleinHex + " ist ungÃ¼ltig!");
 		}
 		
 		int zwichen = kleinHex.toUpperCase().charAt(0);
@@ -132,9 +132,9 @@ class AssymetrischVerschlüsseln {
 		} else if (zwichen >= 'A' && zwichen <= 'F') {
 			zwichen += -'A' + 10;
 		} else {
-			throw new RuntimeException("Die HexZahl darf nur aus Zahlen und den Buchstaben a-f/A-F bestehen: " + kleinHex + " ist ungültig!");
+			throw new RuntimeException("Die HexZahl darf nur aus Zahlen und den Buchstaben a-f/A-F bestehen: " + kleinHex + " ist ungÃ¼ltig!");
 		}
-		rückgabe = (byte) zwichen;
+		rÃ¼ckgabe = (byte) zwichen;
 		
 		zwichen = kleinHex.toUpperCase().charAt(1);
 		if (zwichen >= '0' && zwichen <= '9') {
@@ -142,11 +142,11 @@ class AssymetrischVerschlüsseln {
 		} else if (zwichen >= 'A' && zwichen <= 'F') {
 			zwichen += -'A' + 10;
 		} else {
-			throw new RuntimeException("Die HexZahl darf nur aus Zahlen und den Buchstaben a-f/A-F bestehen: " + kleinHex + " ist ungültig!");
+			throw new RuntimeException("Die HexZahl darf nur aus Zahlen und den Buchstaben a-f/A-F bestehen: " + kleinHex + " ist ungÃ¼ltig!");
 		}
-		rückgabe = (byte) ( (rückgabe << 4) + zwichen);
+		rÃ¼ckgabe = (byte) ( (rÃ¼ckgabe << 4) + zwichen);
 		
-		return rückgabe;
+		return rÃ¼ckgabe;
 	}
 	
 	static String kleineZahlZuHex(int kleineZahl) {
@@ -169,7 +169,7 @@ class AssymetrischVerschlüsseln {
 		case 15:
 			return "F";
 		}
-		throw new RuntimeException("kleine Zahl muss eine einstellige HexZahl sein: " + kleineZahl + " ist ungültig!");
+		throw new RuntimeException("kleine Zahl muss eine einstellige HexZahl sein: " + kleineZahl + " ist ungÃ¼ltig!");
 	}
 	
 }

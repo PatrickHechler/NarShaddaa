@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
-class AssymetrischVerschlüsselnTestTest {
+class AssymetrischVerschlÃ¼sselnTestTest {
 	
 	@Test
 	void test() {
@@ -15,9 +15,9 @@ class AssymetrischVerschlüsselnTestTest {
 		long ergebnis;
 		
 		
-		zwischen = AssymetrischVerschlüsselnTest.longZuByteArr(zahl);
+		zwischen = AssymetrischVerschlÃ¼sselnTest.longZuByteArr(zahl);
 		
-		ergebnis = AssymetrischVerschlüsselnTest.byteArrZuLong(zwischen);
+		ergebnis = AssymetrischVerschlÃ¼sselnTest.byteArrZuLong(zwischen);
 		
 		System.out.println("Orig:		" + zahl);
 		System.out.println("Ergebnis:	" + ergebnis);

@@ -1,6 +1,6 @@
 package de.tafelwischenSecure.benutzer;
 
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
+import de.tafelwischenSecure.rsa.schlÃ¼ssel.eigener.AssymetrischEigener;
 
 public class UserErgebnis {
 	private AssymetrischEigener userKey;
