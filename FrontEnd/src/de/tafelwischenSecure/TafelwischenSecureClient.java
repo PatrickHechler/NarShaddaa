@@ -356,7 +356,7 @@ public class TafelwischenSecureClient {
 	private static void erstellen() {
 		GlobalScanner ben = GlobalScanner.getInstance();
 		while (true) {
-			System.out.println("Wie müchtest du heißen?");
+			System.out.println("Wie möchtest du heißen?");
 			String name = ben.next();
 			try {
 				UserErgebnis user = Benutzer.erstellen(name);
