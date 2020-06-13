@@ -282,7 +282,7 @@ public class TafelwischenSecureClient {
 			for (ShortMessageInterface diese : msgs) {
 				System.out.println("ID:      " + diese.getId());
 				System.out.println("VON:     " + diese.getSendFrom());
-				System.out.println("AN:      " + diese.getTime());
+				System.out.println("ZEIT:    " + diese.getTime());
 				System.out.println("BETREFF: " + diese.getTitle());
 			}
 		} catch (UserDoesNotExistsExeption | WrongPasswortException | IOException e) {
@@ -297,7 +297,7 @@ public class TafelwischenSecureClient {
 			for (ShortMessageInterface diese : msgs) {
 				System.out.println("ID:      " + diese.getId());
 				System.out.println("VON:     " + diese.getSendFrom());
-				System.out.println("AN:      " + diese.getTime());
+				System.out.println("ZEIT:    " + diese.getTime());
 				System.out.println("BETREFF: " + diese.getTitle());
 			}
 		} catch (UserDoesNotExistsExeption | WrongPasswortException | IOException e) {

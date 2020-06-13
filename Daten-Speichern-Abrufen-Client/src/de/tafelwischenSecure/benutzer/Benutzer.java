@@ -87,7 +87,7 @@ public class Benutzer {
 			} catch (NumberFormatException e) {
 				msgId = -1;
 			}
-			rückgabe[runde] = new ShortMessage(shrtMsgs[3 + (runde * 4)], shrtMsgs[4 + (runde * 4)], shrtMsgs[2 + (runde * 4)], msgId);
+			rückgabe[runde] = new ShortMessage(shrtMsgs[3 + (runde * 4)], shrtMsgs[2 + (runde * 4)], shrtMsgs[4 + (runde * 4)], msgId);
 		}
 		return rückgabe;
 	}
@@ -116,7 +116,7 @@ public class Benutzer {
 			} catch (NumberFormatException e) {
 				msgId = -1;
 			}
-			rückgabe[runde] = new ShortMessage(shrtMsgs[3 + (runde * 4)], shrtMsgs[4 + (runde * 4)], shrtMsgs[2 + (runde * 4)], msgId);
+			rückgabe[runde] = new ShortMessage(shrtMsgs[3 + (runde * 4)], shrtMsgs[2 + (runde * 4)], shrtMsgs[4 + (runde * 4)], msgId);
 		}
 		return rückgabe;
 	}
