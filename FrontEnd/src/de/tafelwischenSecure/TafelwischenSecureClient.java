@@ -112,7 +112,7 @@ public class TafelwischenSecureClient {
 			if (Rules.isAcceptableName(name)) {
 				try {
 					if ( !Benutzer.exists(name)) {
-						System.out.println("Du heißt: " + name);
+						System.out.println("Du heißt: " + name+", gib Dein Passwort im Passworteingabefenster ein.");
 						break;
 					} else {
 						System.out.println(name + " existiert bereits");
@@ -364,6 +364,7 @@ public class TafelwischenSecureClient {
 		while (true) {
 			System.out.println("Wie heißt du?");
 			name = ben.next();
+			System.out.println("Gib Dein Passwort im Passwortfenster ein.");
 			pw = passwortEingabe();
 			try {
 				AssymetrischEigener user = Benutzer.anmelden(name, pw);
