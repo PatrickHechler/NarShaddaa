@@ -163,7 +163,7 @@ public class TafelwischenSecureClient {
 			AssymetrischOffen empfängerKey = Benutzer.getOffenFromUser(empfänger);
 			boolean ok = Benutzer.sendEncrypted(username, Rules.generatePwHash(passwort), empfänger, titel, inhalt.toString(), empfängerKey);
 			if (ok) {
-				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empfänger + " geschickt.");
+				System.out.println("Die Nachricht '" + titel + "' wurde erfolgreich an '" + empfänger + "' geschickt.");
 			} else {
 				System.out.println("Die Nachricht konnte nicht versendet wetrden  :-(");
 			}
@@ -208,7 +208,7 @@ public class TafelwischenSecureClient {
 		try {
 			boolean ok = Benutzer.sendMessage(username, Rules.generatePwHash(passwort), empfänger, titel, inhalt.toString());
 			if (ok) {
-				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empfänger + " geschickt.");
+				System.out.println("Die Nachricht '" + titel + "' wurde erfolgreich an '" + empfänger + "' geschickt.");
 			} else {
 				System.out.println("Die Nachricht konnte nicht versendet wetrden  :-(");
 			}
@@ -230,7 +230,7 @@ public class TafelwischenSecureClient {
 		GlobalScanner ben = GlobalScanner.getInstance();
 		StringBuilder inhalt;
 		System.out.println("Gebe nun die Nachricht ein.");
-		System.out.println("Zum beenden 'FERTIG' eingeben.");
+		System.out.println("Zum Beenden 'FERTIG' eingeben.");
 		String zusatz;
 		inhalt = new StringBuilder();
 		while (true) {
