@@ -19,4 +19,8 @@ public class DuplicateIdException extends TafelwischenException {
 		return "The Id exists already";
 	}
 	
+	public String getDoubleThing() {
+		return doubleThing;
+	}
+	
 }
