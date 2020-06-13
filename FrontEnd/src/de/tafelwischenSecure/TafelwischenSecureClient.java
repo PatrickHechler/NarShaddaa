@@ -4,6 +4,8 @@ import java.awt.Window;
 import java.io.IOException;
 
 import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,6 +16,7 @@ import de.hechler.patrick.hilfZeugs.GlobalScanner;
 import de.tafelwischenSecure.benutzer.Benutzer;
 import de.tafelwischenSecure.benutzer.UserErgebnis;
 import de.tafelwischenSecure.exceptions.InvalidUsernameExeption;
+import de.tafelwischenSecure.exceptions.UnknownCommandException;
 import de.tafelwischenSecure.exceptions.UserAlreadyExistsException;
 import de.tafelwischenSecure.exceptions.UserDoesNotExistsExeption;
 import de.tafelwischenSecure.exceptions.WrongPasswortException;
@@ -96,6 +99,37 @@ public class TafelwischenSecureClient {
 			default:
 				help();
 			}
+		}
+	}
+	
+	private static void createUserWithPw() {
+		GlobalScanner ben = GlobalScanner.getInstance();
+		String name;
+		long pw;
+		while (true) {
+			System.out.println("Wie möchtest du heißen?");
+			name = ben.next();
+			if (Rules.isAcceptableName(name)) {
+				try {
+					if ( !Benutzer.exists(name)) {
+						System.out.println("Du heißt: " + name);
+						break;
+					} else {
+						System.out.println(name + " existiert bereits");
+					}
+				} catch (IOException e) {
+					System.out.println("Da gab es ein Problem: " + e.toString());
+				}
+			}
+			System.out.println(name + " ist kein akzeptabler Benutzername.");
+		}
+		pw = passwortEingabe();
+		try {
+			Benutzer.erstellen(name, pw);
+			passwort = pw;
+			username = name;
+		} catch (UserAlreadyExistsException | UnknownCommandException | IOException e) {
+			System.out.println("Da gab es ein Problem: " + e.toString());
 		}
 	}
 	
@@ -316,7 +350,7 @@ public class TafelwischenSecureClient {
 				return;
 			}
 			if (eingabe.equalsIgnoreCase("erstellen") || eingabe.equalsIgnoreCase("e")) {
-				erstellen();
+				createUserWithPw();
 				return;
 			}
 			System.out.println(eingabe + " steht nicht zur auswahl");
@@ -328,7 +362,7 @@ public class TafelwischenSecureClient {
 		String name = null;
 		long pw;
 		while (true) {
-			System.out.println("Wie heiüt du?");
+			System.out.println("Wie heißt du?");
 			name = ben.next();
 			pw = passwortEingabe();
 			try {
@@ -353,6 +387,7 @@ public class TafelwischenSecureClient {
 		}
 	}
 	
+	@Deprecated
 	private static void erstellen() {
 		GlobalScanner ben = GlobalScanner.getInstance();
 		while (true) {
@@ -380,7 +415,7 @@ public class TafelwischenSecureClient {
 			try {
 				return Long.parseLong(eingabe);
 			} catch (NumberFormatException fehler) {
-				System.out.println("Dies ist kein gültiges Passwort.");
+				System.out.println("Dies ist kein gültiges Passwort. Gültige Passwörter sind Zahlen.");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException ignore) {
@@ -401,7 +436,13 @@ public class TafelwischenSecureClient {
 			Window win = SwingUtilities.getWindowAncestor(comp);
 			win.dispose();
 		});
-		JOptionPane.showOptionDialog(null, panel, "The title", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+
+		JOptionPane pane = new JOptionPane(panel, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, options, null);
+		JDialog dialog = pane.createDialog("Passworteingabe");
+//		dialog.setAlwaysOnTop(true);
+		pass.requestFocus();
+		dialog.setVisible(true);
+		
 		char[] password = pass.getPassword();
 		return new String(password);
 	}

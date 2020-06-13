@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project FrontEnd">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="${dir.buildfile}/../.."/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/frontend.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="de.tafelwischenSecure.TafelwischenSecureClient"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="${dir.jarfile}/bin"/>
+            <fileset dir="${dir.workspace}/NarShaddaa/hilfZeugs/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.jupiter.api_5.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.jupiter.engine_5.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.jupiter.migrationsupport_5.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.jupiter.params_5.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.platform.commons_1.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.platform.engine_1.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.platform.launcher_1.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.platform.runner_1.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.platform.suite.api_1.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit.vintage.engine_5.6.0.v20200203-2009.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.opentest4j_1.2.0.v20190826-0900.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.apiguardian_1.1.0.v20190826-0900.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.junit_4.13.0.v20200204-1500.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/DEV/bin/eclipse-java-2020-03/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/NarShaddaa/hilfZeugs/teslibs/byte-buddy-1.10.5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/NarShaddaa/hilfZeugs/teslibs/byte-buddy-agent-1.10.5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/NarShaddaa/hilfZeugs/teslibs/objenesis-2.6.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/NarShaddaa/hilfZeugs/teslibs/mockito-core-3.3.3.jar"/>
+            <fileset dir="${dir.workspace}/NarShaddaa/Daten-Speichern-Abrufen-Server-API/bin"/>
+            <fileset dir="${dir.workspace}/NarShaddaa/Daten-Speichern-Abrufen-Client/bin"/>
+            <fileset dir="${dir.workspace}/NarShaddaa/AssymetrischVerschlüsseln/bin"/>
+        </jar>
+    </target>
+</project>
