@@ -145,11 +145,11 @@ public class TafelwischenSecureClient {
 	}
 	
 	private static void sendEncMsg() {
-		String empfünger;
+		String empfänger;
 		String titel;
 		String inhalt;
 		try {
-			empfünger = sendmsgEmpfüngerEingabe();
+			empfänger = sendmsgEmpfängerEingabe();
 		} catch (UserDoesNotExistsExeption e) {
 			System.out.println(e.getUsername() + " existiert nicht");
 			return;
@@ -160,10 +160,10 @@ public class TafelwischenSecureClient {
 		titel = sendMsgBetreffEingabe();
 		inhalt = sendMsgInhaltEingeben();
 		try {
-			AssymetrischOffen empfüngerKey = Benutzer.getOffenFromUser(empfünger);
-			boolean ok = Benutzer.sendEncrypted(username, Rules.generatePwHash(passwort), empfünger, titel, inhalt.toString(), empfüngerKey);
+			AssymetrischOffen empfängerKey = Benutzer.getOffenFromUser(empfänger);
+			boolean ok = Benutzer.sendEncrypted(username, Rules.generatePwHash(passwort), empfänger, titel, inhalt.toString(), empfängerKey);
 			if (ok) {
-				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empfünger + " geschickt.");
+				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empfänger + " geschickt.");
 			} else {
 				System.out.println("Die Nachricht konnte nicht versendet wetrden  :-(");
 			}
@@ -191,11 +191,11 @@ public class TafelwischenSecureClient {
 	}
 	
 	private static void sendMsg() {
-		String empfünger;
+		String empfänger;
 		String titel;
 		String inhalt;
 		try {
-			empfünger = sendmsgEmpfüngerEingabe();
+			empfänger = sendmsgEmpfängerEingabe();
 		} catch (UserDoesNotExistsExeption e) {
 			System.out.println(e.getUsername() + " existiert nicht");
 			return;
@@ -206,9 +206,9 @@ public class TafelwischenSecureClient {
 		titel = sendMsgBetreffEingabe();
 		inhalt = sendMsgInhaltEingeben();
 		try {
-			boolean ok = Benutzer.sendMessage(username, Rules.generatePwHash(passwort), empfünger, titel, inhalt.toString());
+			boolean ok = Benutzer.sendMessage(username, Rules.generatePwHash(passwort), empfänger, titel, inhalt.toString());
 			if (ok) {
-				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empfünger + " geschickt.");
+				System.out.println("Die Nachricht " + titel + " wurde erfolgreich an " + empfänger + " geschickt.");
 			} else {
 				System.out.println("Die Nachricht konnte nicht versendet wetrden  :-(");
 			}
@@ -243,19 +243,19 @@ public class TafelwischenSecureClient {
 		return inhalt.toString();
 	}
 	
-	private static String sendmsgEmpfüngerEingabe() throws UserDoesNotExistsExeption, IOException {
+	private static String sendmsgEmpfängerEingabe() throws UserDoesNotExistsExeption, IOException {
 		GlobalScanner ben = GlobalScanner.getInstance();
-		String empfünger;
-		System.out.println("Gebe nun den Empfünger ein.");
-		empfünger = ben.next();
+		String empfänger;
+		System.out.println("Gebe nun den Empfänger ein.");
+		empfänger = ben.next();
 		try {
-			if ( !Benutzer.exists(empfünger)) {
-				throw new UserDoesNotExistsExeption(empfünger);
+			if ( !Benutzer.exists(empfänger)) {
+				throw new UserDoesNotExistsExeption(empfänger);
 			}
 		} catch (IOException e) {
 			throw new IOException();
 		}
-		return empfünger;
+		return empfänger;
 	}
 	
 	private static void getMsg(long id) {
