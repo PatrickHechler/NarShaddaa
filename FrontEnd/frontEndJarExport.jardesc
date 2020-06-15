@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="I:/Zeugs/Projekte/NarShaddaa.wbts/Java/bin/Client/tafelwischenSecureClient.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/FrontEnd/frontEndJarExport.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=FrontEnd/src&lt;de.tafelwischenSecure{TafelwischenSecureClient.java[TafelwischenSecureClient" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <file path="/FrontEnd/build-frontend-jar.xml"/>
+        <file path="/FrontEnd/.gitignore"/>
+        <javaElement handleIdentifier="=Daten-Speichern-Abrufen-Server-API/src"/>
+        <file path="/FrontEnd/.project"/>
+        <javaElement handleIdentifier="=Daten-Speichern-Abrufen-Client/src"/>
+        <javaElement handleIdentifier="=FrontEnd/src"/>
+        <javaElement handleIdentifier="=AssymetrischVerschlüsseln/src"/>
+        <javaElement handleIdentifier="=hilfZeugs/src"/>
+        <file path="/FrontEnd/.classpath"/>
+    </selectedElements>
+</jardesc>

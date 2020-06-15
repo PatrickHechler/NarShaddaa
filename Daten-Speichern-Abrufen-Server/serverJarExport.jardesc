@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="I:/Zeugs/Projekte/NarShaddaa.wbts/Java/bin/Server/tafelwischenSecureServer.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/Daten-Speichern-Abrufen-Server/serverJarExport.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=Daten-Speichern-Abrufen-Server/src&lt;de.tafelwischenSecure{TafelwischenSecureServer.java[TafelwischenSecureServer" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <javaElement handleIdentifier="=AssymetrischVerschlüsseln/src"/>
+        <javaElement handleIdentifier="=Daten-Speichern-Abrufen-Server/src"/>
+        <javaElement handleIdentifier="=Daten-Speichern-Abrufen-Server-API/src"/>
+        <javaElement handleIdentifier="=hilfZeugs/src"/>
+    </selectedElements>
+</jardesc>
