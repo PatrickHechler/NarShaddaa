@@ -29,7 +29,8 @@ import de.tafelwischenSecure.worker.ServerWorkerInterface;
 
 public class Server {
 	
-	private static final String SAVE_START = "SERVER-DATA:V" + TafelwischenSecureServer.VERSION;
+	private static final String SAVE_START_ANFANG = "SERVER-DATA:V";
+	private static final String SAVE_START = SAVE_START_ANFANG + TafelwischenSecureServer.VERSION;
 	private static final String SAVE_END = "FINISH";
 	private AssymetrischPaar key;
 	private ServerCommandExecuterInterface commandExecuter;
@@ -205,31 +206,34 @@ public class Server {
 		try (DataInputStream leser = new DataInputStream(new FileInputStream(dataFile.toString()))) {
 			
 			String start = readUTF(leser);
-			if ( !SAVE_START.equals(start)) {
+			if (SAVE_START.equals(start) || (SAVE_START_ANFANG + 4).equals(start)) {
+				
+				String keyString = readUTF(leser);
+				this.key = new AssymetrischPaar(keyString);
+				
+				ServerUser.removeAllUsers();
+				int sieze = readInt(leser);
+				for (int runde = 0; runde < sieze; runde ++ ) {
+					ServerUser newUsewr = ServerUser.createFromDataStream(leser);
+					TafelwischenSecureServer.logDebug(newUsewr.toString());
+				}
+				
+				ServerMessage.removeAllMessages();
+				long msgCounter = readLong(leser);
+				ServerMessage.setCounter(msgCounter);
+				sieze = readInt(leser);
+				for (int runde = 0; runde < sieze; runde ++ ) {
+					ServerMessage newMessage = ServerMessage.createFromDataStream(leser);
+					TafelwischenSecureServer.logDebug(newMessage.toString());
+				}
+				
+				String ende = readUTF(leser);
+				if ( !SAVE_END.equals(ende)) {
+					throw new CorruptServerDataException("magic Finish");
+				}
+				
+			} else {
 				throw new CorruptServerDataException("magic start");
-			}
-			String keyString = readUTF(leser);
-			this.key = new AssymetrischPaar(keyString);
-
-			ServerUser.removeAllUsers();
-			int sieze = readInt(leser);
-			for (int runde = 0; runde < sieze; runde ++ ) {
-				ServerUser newUsewr = ServerUser.createFromDataStream(leser);
-				TafelwischenSecureServer.logDebug(newUsewr.toString());
-			}
-			
-			ServerMessage.removeAllMessages();
-			long msgCounter = readLong(leser);
-			ServerMessage.setCounter(msgCounter);
-			sieze = readInt(leser);
-			for (int runde = 0; runde < sieze; runde ++ ) {
-				ServerMessage newMessage = ServerMessage.createFromDataStream(leser);
-				TafelwischenSecureServer.logDebug(newMessage.toString());
-			}
-			
-			String ende = readUTF(leser);
-			if ( !SAVE_END.equals(ende)) {
-				throw new CorruptServerDataException("magic Finish");
 			}
 		} catch (RuntimeException | IOException e) {
 			e.printStackTrace();
@@ -265,7 +269,7 @@ public class Server {
 		ServerMessage.removeAllMessages();
 		save();
 	}
-
+	
 	public void resetmessages() {
 		ServerMessage.removeAllMessages();
 	}
