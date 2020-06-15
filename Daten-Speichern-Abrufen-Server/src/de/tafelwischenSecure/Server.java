@@ -31,6 +31,7 @@ public class Server {
 	
 	private static final String SAVE_START_ANFANG = "SERVER-DATA:V";
 	private static final String SAVE_START = SAVE_START_ANFANG + TafelwischenSecureServer.VERSION;
+	private static final String SAVE_START_V4 = SAVE_START_ANFANG + 4;
 	private static final String SAVE_END = "FINISH";
 	private AssymetrischPaar key;
 	private ServerCommandExecuterInterface commandExecuter;
@@ -206,7 +207,10 @@ public class Server {
 		try (DataInputStream leser = new DataInputStream(new FileInputStream(dataFile.toString()))) {
 			
 			String start = readUTF(leser);
-			if (SAVE_START.equals(start) || (SAVE_START_ANFANG + 4).equals(start)) {
+			
+			switch (start) {
+			case SAVE_START:
+			case SAVE_START_V4:
 				
 				String keyString = readUTF(leser);
 				this.key = new AssymetrischPaar(keyString);
@@ -232,9 +236,12 @@ public class Server {
 					throw new CorruptServerDataException("magic Finish");
 				}
 				
-			} else {
+				break;
+			
+			default:
 				throw new CorruptServerDataException("magic start");
 			}
+			
 		} catch (RuntimeException | IOException e) {
 			e.printStackTrace();
 			throw new CorruptServerDataException(e.toString());
