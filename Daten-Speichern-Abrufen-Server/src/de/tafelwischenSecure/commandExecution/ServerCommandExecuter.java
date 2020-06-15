@@ -1,13 +1,9 @@
 package de.tafelwischenSecure.commandExecution;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-import de.hechler.patrick.hilfZeugs.umwandeln.StringByteConvert;
 import de.tafelwischenSecure.Constants;
-import de.tafelwischenSecure.Rules;
 import de.tafelwischenSecure.Server;
 import de.tafelwischenSecure.TafelwischenSecureServer;
 import de.tafelwischenSecure.exceptions.InvalidAccessException;

@@ -1,6 +1,7 @@
 package de.tafelwischenSecure.benutzer;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.io.IOException;
@@ -18,7 +19,6 @@ import de.tafelwischenSecure.exceptions.UserAlreadyExistsException;
 import de.tafelwischenSecure.exceptions.UserException;
 import de.tafelwischenSecure.komm.KommunikationInterface;
 import de.tafelwischenSecure.rsa.schlüssel.AssymetrischPaar;
-import de.tafelwischenSecure.rsa.schlüssel.eigener.AssymetrischEigener;
 import de.tafelwischenSecure.secure.ClientSidedSecurityManagerInterface;
 import de.tafelwischenSecure.secure.VerschlüsselteServerNachricht;
 

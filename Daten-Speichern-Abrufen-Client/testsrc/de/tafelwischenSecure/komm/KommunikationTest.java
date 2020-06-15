@@ -1,18 +1,16 @@
 package de.tafelwischenSecure.komm;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.io.UTFDataFormatException;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.tafelwischenSecure.LocalhostTestServer;
-import de.tafelwischenSecure.komm.Kommunikation;
-import de.tafelwischenSecure.komm.KommunikationInterface;
 
 class KommunikationTest {
 	
