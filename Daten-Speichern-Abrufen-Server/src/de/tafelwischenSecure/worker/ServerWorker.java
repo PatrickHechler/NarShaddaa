@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.List;
 
 import de.hechler.patrick.hilfZeugs.CompatibilityUtils;
-import de.hechler.patrick.hilfZeugs.patExep.NotYetImplementedException;
+import de.hechler.patrick.hilfZeugs.objects.patExep.NotYetImplementedException;
 import de.hechler.patrick.hilfZeugs.umwandeln.ListUndArrayUmwandeln;
 import de.tafelwischenSecure.Constants;
 import de.tafelwischenSecure.Server;

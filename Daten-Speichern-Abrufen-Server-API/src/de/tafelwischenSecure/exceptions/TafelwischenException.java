@@ -1,6 +1,6 @@
 package de.tafelwischenSecure.exceptions;
 
-import de.hechler.patrick.hilfZeugs.patExep.PatrExeption;
+import de.hechler.patrick.hilfZeugs.objects.patExep.PatrExeption;
 
 public abstract class TafelwischenException extends PatrExeption {
 	
