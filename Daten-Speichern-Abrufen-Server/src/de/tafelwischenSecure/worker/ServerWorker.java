@@ -4,11 +4,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hechler.patrick.hilfZeugs.CompatibilityUtils;
 import de.hechler.patrick.hilfZeugs.objects.patExep.NotYetImplementedException;
-import de.hechler.patrick.hilfZeugs.umwandeln.ListUndArrayUmwandeln;
+import de.hechler.patrick.hilfZeugs.umwandeln.Umwandeln;
 import de.tafelwischenSecure.Constants;
 import de.tafelwischenSecure.Server;
 import de.tafelwischenSecure.TafelwischenSecureServer;
@@ -100,12 +101,16 @@ public class ServerWorker implements ServerWorkerInterface {
 			}
 			String[] befehle = command.split(Constants.COMMAND_SPLITTER);
 			if (befehle[0].equals(Constants.USER)) {
-				List <String> commandList = ListUndArrayUmwandeln.umwandelnString(befehle);
+//				List <String> commandList = ListUndArrayUmwandeln.umwandelnString(befehle);
+				List <String> commandList = new ArrayList <String>();
+				Umwandeln.addToCollection(befehle, commandList);
 				commandList.remove(0);
 				return executeUserCommand(commandList, command);
 			}
 			if (befehle[0].equals(Constants.GROUP)) {
-				List <String> commandList = ListUndArrayUmwandeln.umwandelnString(befehle);
+//				List <String> commandList = ListUndArrayUmwandeln.umwandelnString(befehle);
+				List <String> commandList = new ArrayList <String>();
+				Umwandeln.addToCollection(befehle, commandList);
 				commandList.remove(0);
 				return executeGroupCommand(commandList, command);
 			}
